@@ -13,7 +13,9 @@
 
 - (void)loadView
 {
-    self.view = [ZGestureHandlerView new];
+	_gestureHandlerView = [ZGestureHandlerView new];
+	self.view = _gestureHandlerView;
+	
 }
 
 - (void)viewDidLoad
