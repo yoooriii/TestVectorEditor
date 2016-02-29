@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="hNz-i8-nSY">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
+    </dependencies>
+    <scenes>
+        <!--Empty View Controller-->
+        <scene sceneID="4z9-Ri-a0y">
+            <objects>
+                <viewController storyboardIdentifier="emptyVC" title="zzz" id="hNz-i8-nSY" userLabel="Empty View Controller" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="5tz-DK-DL8"/>
+                        <viewControllerLayoutGuide type="bottom" id="tDY-DL-cRF"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="45H-nF-XSb">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NVn-Ps-ilP">
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                                <color key="backgroundColor" red="0.83838383839999997" green="0.76037423421354411" blue="0.31684647317078857" alpha="1" colorSpace="calibratedRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="30"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
+                                        <color key="value" red="1" green="0.24547218560026751" blue="0.23605590049699843" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                        <integer key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="NVn-Ps-ilP" firstAttribute="top" secondItem="5tz-DK-DL8" secondAttribute="bottom" id="0cy-lJ-al6"/>
+                            <constraint firstItem="tDY-DL-cRF" firstAttribute="top" secondItem="NVn-Ps-ilP" secondAttribute="bottom" id="3EL-Il-hdV"/>
+                            <constraint firstItem="NVn-Ps-ilP" firstAttribute="leading" secondItem="45H-nF-XSb" secondAttribute="leading" id="QMX-M0-pUU"/>
+                            <constraint firstAttribute="trailing" secondItem="NVn-Ps-ilP" secondAttribute="trailing" id="n4p-cK-hgm"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NYJ-Dg-MKe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-50" y="627"/>
+        </scene>
+        <!--my nav item-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController storyboardIdentifier="blah-blah-blah" id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="POq-C8-C6A"/>
+                        <viewControllerLayoutGuide type="bottom" id="Jx8-e7-Qjk"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="6Jn-1A-ECa" customClass="COSplashViewPlaceholder">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="deM-tE-grJ">
+                                <rect key="frame" x="16" y="90" width="209" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="u3L-Fd-8SJ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xDc-bz-xc0">
+                                <rect key="frame" x="253" y="148" width="51" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="itm-Ks-Zia"/>
+                                </constraints>
+                                <state key="normal" title="hide kb"/>
+                                <connections>
+                                    <action selector="hideKB:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Hfn-Db-WYc"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="deM-tE-grJ" firstAttribute="top" secondItem="POq-C8-C6A" secondAttribute="bottom" constant="26" id="0RK-p7-lYl"/>
+                            <constraint firstItem="deM-tE-grJ" firstAttribute="leading" secondItem="6Jn-1A-ECa" secondAttribute="leadingMargin" id="JX6-UK-d2C"/>
+                            <constraint firstItem="xDc-bz-xc0" firstAttribute="top" secondItem="POq-C8-C6A" secondAttribute="bottom" constant="84" id="T1y-Sf-hpd"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="deM-tE-grJ" secondAttribute="trailing" constant="79" id="eeN-tG-1y7"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="xDc-bz-xc0" secondAttribute="trailing" id="pVR-zO-Pci"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="my nav item" id="vx1-rD-jly">
+                        <leftBarButtonItems>
+                            <barButtonItem title="Item" id="IaR-80-DyH"/>
+                            <barButtonItem title="Item" id="NKi-dQ-46U">
+                                <view key="customView" contentMode="scaleToFill" id="ncR-SN-sin">
+                                    <rect key="frame" x="50" y="5" width="769" height="33"/>
+                                    <autoresizingMask key="autoresizingMask" heightSizable="YES"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ngF-6a-snK" customClass="COBreadCrumpsView">
+                                            <rect key="frame" x="14" y="-18" width="771" height="47"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <view opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PDf-G1-3n1" userLabel="Buttons View">
+                                            <rect key="frame" x="679" y="0.0" width="96" height="40"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ldh-9Z-qbN">
+                                                    <rect key="frame" x="59" y="-2" width="40" height="40"/>
+                                                    <state key="normal" image="fm_tb_select_icon.png">
+                                                        <color key="titleColor" red="0.029710310220000001" green="0.57282162410000004" blue="0.95101505470000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                    <state key="disabled" image="fm_tb_select_disable_icon.png"/>
+                                                    <state key="highlighted" image="fm_tb_select_disable_icon.png">
+                                                        <color key="titleColor" red="0.029710310220000001" green="0.57282162410000004" blue="0.95101505470000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                </button>
+                                                <button opaque="NO" contentMode="center" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FSy-6g-IKj" userLabel="Button - New Document">
+                                                    <rect key="frame" x="6" y="-2" width="40" height="40"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
+                                                    <state key="normal" image="fm_tb_add_icon.png">
+                                                        <color key="titleColor" red="0.24335735350000001" green="0.26036691760000003" blue="0.28220533289999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="highlighted">
+                                                        <color key="titleColor" red="0.2791626915" green="0.68653294620000005" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <view hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="U3M-ff-W7F" userLabel="Trash Buttons View">
+                                            <rect key="frame" x="571" y="0.0" width="191" height="40"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P3J-kO-pyR">
+                                                    <rect key="frame" x="167" y="-2" width="40" height="40"/>
+                                                    <state key="normal" title="Select" image="fm_tb_select_icon.png">
+                                                        <color key="titleColor" red="0.029710310220000001" green="0.57282162410000004" blue="0.95101505470000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                    <state key="disabled" image="fm_tb_select_disable_icon.png">
+                                                        <color key="titleColor" red="0.61568627450000002" green="0.83529411760000005" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                    <state key="highlighted" image="fm_tb_select_disable_icon.png">
+                                                        <color key="titleColor" red="0.029710310220000001" green="0.57282162410000004" blue="0.95101505470000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                </button>
+                                                <button opaque="NO" contentMode="center" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Amy-8t-9sn" userLabel="Button - Empty Trash">
+                                                    <rect key="frame" x="40" y="-2" width="123" height="40"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
+                                                    <state key="normal" title="Empty Trash">
+                                                        <color key="titleColor" red="0.029710310220000001" green="0.57282162410000004" blue="0.95101505470000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                    <state key="disabled">
+                                                        <color key="titleColor" red="0.61568627450000002" green="0.83529411760000005" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                    <state key="highlighted">
+                                                        <color key="titleColor" red="0.029710310220000001" green="0.57282162410000004" blue="0.95101505470000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <view hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yeG-FZ-bkr" userLabel="Select Buttons View">
+                                            <rect key="frame" x="14" y="0.0" width="758" height="40"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pvL-gb-0hD">
+                                                    <rect key="frame" x="94" y="3" width="101" height="30"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="19"/>
+                                                    <state key="normal" title="Select All">
+                                                        <color key="titleColor" red="0.0" green="0.63529411759999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                    <state key="disabled">
+                                                        <color key="titleColor" red="0.61568627450000002" green="0.83529411760000005" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                    <state key="selected">
+                                                        <color key="titleColor" red="0.029710310220000001" green="0.57282162410000004" blue="0.95101505470000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dk2-Wd-mSP" userLabel="Button - Share">
+                                                    <rect key="frame" x="414" y="-2" width="40" height="40"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
+                                                    <state key="normal" image="fm_tb_share_icon.png">
+                                                        <color key="titleColor" red="0.24335735350000001" green="0.26036691760000003" blue="0.28220533289999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="highlighted" image="fm_tb_share_icon_selected.png">
+                                                        <color key="titleColor" red="0.2791626915" green="0.68653294620000005" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mGT-IF-zVk" userLabel="Button - Offline">
+                                                    <rect key="frame" x="463" y="-2" width="40" height="40"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
+                                                    <state key="normal" image="fm_tb_offline_icon.png">
+                                                        <color key="titleColor" red="0.24335735350000001" green="0.26036691760000003" blue="0.28220533289999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="selected" image="fm_tb_offline_icon_selected.png"/>
+                                                    <state key="highlighted" image="fm_tb_offline_icon_selected.png">
+                                                        <color key="titleColor" red="0.2791626915" green="0.68653294620000005" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cE6-dB-E1H" userLabel="Button - IOS Share">
+                                                    <rect key="frame" x="511" y="-2" width="40" height="40"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
+                                                    <state key="normal" image="fm_tb_ios_share_icon.png">
+                                                        <color key="titleColor" red="0.24335735350000001" green="0.26036691760000003" blue="0.28220533289999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="highlighted" image="fm_tb_ios_sh_selected.png">
+                                                        <color key="titleColor" red="0.2791626915" green="0.68653294620000005" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LbW-dR-geO" userLabel="Button - Duplicate">
+                                                    <rect key="frame" x="559" y="-2" width="40" height="40"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
+                                                    <state key="normal" image="fm_tb_duplicate_icon.png">
+                                                        <color key="titleColor" red="0.24335735350000001" green="0.26036691760000003" blue="0.28220533289999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="highlighted" image="fm_tb_duplicate_icon_selected.png">
+                                                        <color key="titleColor" red="0.2791626915" green="0.68653294620000005" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C1W-EL-MkN" userLabel="Button - Trash">
+                                                    <rect key="frame" x="655" y="-2" width="40" height="40"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
+                                                    <state key="normal" image="fm_tb_delete_icon.png">
+                                                        <color key="titleColor" red="0.24335735350000001" green="0.26036691760000003" blue="0.28220533289999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="highlighted" image="fm_tb_delete_icon_selected.png">
+                                                        <color key="titleColor" red="0.2791626915" green="0.68653294620000005" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Kc-WE-fji" userLabel="Button - Move">
+                                                    <rect key="frame" x="607" y="-2" width="40" height="40"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
+                                                    <state key="normal" image="fm_tb_move_icon.png">
+                                                        <color key="titleColor" red="0.24335735350000001" green="0.26036691760000003" blue="0.28220533289999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="highlighted" image="fm_tb_move_icon_selected.png">
+                                                        <color key="titleColor" red="0.2791626915" green="0.68653294620000005" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b9A-Eg-MH4">
+                                                    <rect key="frame" x="708" y="0.0" width="48" height="40"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="19"/>
+                                                    <state key="normal" title="Done">
+                                                        <color key="titleColor" red="0.029710310220000001" green="0.57282162410000004" blue="0.95101505470000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                    <state key="disabled">
+                                                        <color key="titleColor" red="0.61568627450000002" green="0.83529411760000005" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <view hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BL2-AA-UsN" userLabel="Trash Select Buttons View">
+                                            <rect key="frame" x="14" y="0.0" width="743" height="40"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S9I-X8-nTN" userLabel="Button - Select All">
+                                                    <rect key="frame" x="94" y="3" width="102" height="30"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="19"/>
+                                                    <state key="normal" title="Select All">
+                                                        <color key="titleColor" red="0.029710310220000001" green="0.57282162410000004" blue="0.95101505470000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                    <state key="disabled">
+                                                        <color key="titleColor" red="0.61568627450000002" green="0.83529411760000005" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C40-UU-C1u" userLabel="Button - Trash">
+                                                    <rect key="frame" x="607" y="-2" width="40" height="40"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
+                                                    <state key="normal" image="fm_tb_delete_icon.png">
+                                                        <color key="titleColor" red="0.24335735350000001" green="0.26036691760000003" blue="0.28220533289999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="highlighted" image="fm_tb_delete_icon_selected.png">
+                                                        <color key="titleColor" red="0.2791626915" green="0.68653294620000005" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rgt-ku-Ocx" userLabel="Button - Move">
+                                                    <rect key="frame" x="655" y="-2" width="40" height="40"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
+                                                    <state key="normal" image="fm_tb_move_icon.png">
+                                                        <color key="titleColor" red="0.24335735350000001" green="0.26036691760000003" blue="0.28220533289999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <state key="highlighted" image="fm_tb_move_icon_selected.png">
+                                                        <color key="titleColor" red="0.2791626915" green="0.68653294620000005" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XsV-yE-O25">
+                                                    <rect key="frame" x="708" y="0.0" width="48" height="40"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="19"/>
+                                                    <state key="normal" title="Done">
+                                                        <color key="titleColor" red="0.029710310220000001" green="0.57282162410000004" blue="0.95101505470000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </state>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </subviews>
+                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </barButtonItem>
+                        </leftBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="w1q-M9-bKx"/>
+                        <connections>
+                            <outlet property="titleView" destination="nUD-ZT-gBY" id="jDq-2i-RoR"/>
+                        </connections>
+                    </navigationItem>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="myview" destination="ncR-SN-sin" id="Qmx-bJ-tHK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="nUD-ZT-gBY" userLabel="my title view">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="1" green="0.23039293199999999" blue="0.21028676769999999" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
+            </objects>
+            <point key="canvasLocation" x="239" y="291"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="fm_tb_add_icon.png" width="49" height="49"/>
+        <image name="fm_tb_delete_icon.png" width="49" height="49"/>
+        <image name="fm_tb_delete_icon_selected.png" width="49" height="49"/>
+        <image name="fm_tb_duplicate_icon.png" width="49" height="49"/>
+        <image name="fm_tb_duplicate_icon_selected.png" width="49" height="49"/>
+        <image name="fm_tb_ios_sh_selected.png" width="49" height="49"/>
+        <image name="fm_tb_ios_share_icon.png" width="49" height="49"/>
+        <image name="fm_tb_move_icon.png" width="49" height="49"/>
+        <image name="fm_tb_move_icon_selected.png" width="49" height="49"/>
+        <image name="fm_tb_offline_icon.png" width="49" height="49"/>
+        <image name="fm_tb_offline_icon_selected.png" width="49" height="49"/>
+        <image name="fm_tb_select_disable_icon.png" width="49" height="49"/>
+        <image name="fm_tb_select_icon.png" width="49" height="49"/>
+        <image name="fm_tb_share_icon.png" width="49" height="49"/>
+        <image name="fm_tb_share_icon_selected.png" width="49" height="49"/>
+    </resources>
+</document>
