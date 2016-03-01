@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class ZGestureHandlerView;
+
 @interface ZGestureHandlerVC : UIViewController
+
+@property (nonatomic, readonly) ZGestureHandlerView * gestureHandlerView;
 
 @end

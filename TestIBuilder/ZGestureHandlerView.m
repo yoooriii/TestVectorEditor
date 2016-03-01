@@ -7,6 +7,7 @@
 //
 
 #import "ZGestureHandlerView.h"
+#import "ZRulerView.h"
 
 static inline CGPoint CGRectGetMaxXY(CGRect rect) {
     return CGPointMake(CGRectGetMaxX(rect), CGRectGetMaxY(rect));
@@ -30,8 +31,15 @@ static inline CGPoint CGPointPlusPoint(CGPoint pt1, CGPoint pt2) {
 - (void)_internalInit;
 @end
 
+typedef NS_ENUM(NSUInteger, ZPinKind)
+{
+	ZPinKindLeftTop = 1,
+	ZPinKindRightBottom
+};
+
 @interface ZPinView : ZHandleMoveView
 @property (nonatomic, strong) UIColor * pinColor;
+@property (nonatomic, assign) ZPinKind pinKind;
 @end
 
 
@@ -45,7 +53,9 @@ static inline CGPoint CGPointPlusPoint(CGPoint pt1, CGPoint pt2) {
 @property (nonatomic, strong) ZPinView *handleView2;
 @property (nonatomic, strong) ZSelectionView *selectionView;
 @property (nonatomic, assign) BOOL disableNormalization;
-@property (nonatomic, assign, getter=isSelected) BOOL selected;
+@property (nonatomic, strong) UITapGestureRecognizer * tapRecognizer;
+@property (nonatomic, strong) ZRulerView *rulerViewVertical;
+@property (nonatomic, strong) ZRulerView *rulerViewHorizontal;
 - (void)subviewDidBeginMoving:(UIView*)subview;
 - (void)subviewDidMove:(UIView*)subview;
 - (void)subviewDidEndMoving:(UIView*)subview;
@@ -152,7 +162,7 @@ static inline CGPoint CGPointPlusPoint(CGPoint pt1, CGPoint pt2) {
 
 - (CGSize)sizeThatFits:(CGSize)size
 {
-    return CGSizeMake(44, 44);
+    return CGSizeMake(32, 32);
 }
 
 @end
@@ -164,13 +174,30 @@ static inline CGPoint CGPointPlusPoint(CGPoint pt1, CGPoint pt2) {
 {
     [super _internalInit];
 
-    self.backgroundColor = [UIColor whiteColor];
+    self.backgroundColor = [UIColor clearColor];
     self.pinColor = [UIColor blueColor];
+	
+	if (1) {
+		self.layer.borderColor = [UIColor greenColor].CGColor;
+		self.layer.borderWidth = 1;
+	}
 }
 
 - (void)drawRect:(CGRect)rect
 {
-    UIBezierPath * path = [UIBezierPath bezierPathWithOvalInRect:CGRectInset(rect, 1, 1)];
+	CGRect pinRect = CGRectMake(0, 0, CGRectGetMaxX(rect)*0.66, CGRectGetMaxY(rect)*0.66);
+	
+	switch (self.pinKind)
+	{
+		case ZPinKindLeftTop:
+			break;
+			
+		case ZPinKindRightBottom:
+			pinRect.origin = CGPointMake(CGRectGetMaxX(rect)-pinRect.size.width, CGRectGetMaxY(rect)-pinRect.size.height);
+			break;
+	}//sw
+	
+    UIBezierPath * path = [UIBezierPath bezierPathWithOvalInRect:CGRectInset(pinRect, 2, 2)];
     [[UIColor blackColor] setStroke];
     [self.pinColor setFill];
     path.lineWidth = 1;
@@ -185,13 +212,39 @@ static inline CGPoint CGPointPlusPoint(CGPoint pt1, CGPoint pt2) {
 
 @implementation ZSelectionView
 
++ (Class)layerClass
+{
+	return [CAShapeLayer class];
+}
+
+- (CAShapeLayer*)shapeLayer
+{
+	return (CAShapeLayer*)self.layer;
+}
+
 - (void)_internalInit
 {
     [super _internalInit];
 
-    self.layer.borderColor = [UIColor greenColor].CGColor;
-    self.layer.borderWidth = 1;
-    self.backgroundColor = [UIColor clearColor];
+	self.backgroundColor = [UIColor clearColor];
+	
+	self.shapeLayer.lineWidth = 1;
+	self.shapeLayer.lineDashPattern = @[@10,@10];
+	self.shapeLayer.strokeColor = [UIColor blueColor].CGColor;
+	self.shapeLayer.fillColor = nil;
+	
+	[self updateShapeLayer];
+}
+
+- (void)layoutSubviews
+{
+	[self updateShapeLayer];
+}
+
+- (void)updateShapeLayer
+{
+	UIBezierPath * bezier = [UIBezierPath bezierPathWithRect:self.bounds];
+	self.shapeLayer.path = bezier.CGPath;
 }
 
 @end
@@ -200,18 +253,13 @@ static inline CGPoint CGPointPlusPoint(CGPoint pt1, CGPoint pt2) {
 
 
 @implementation ZGestureHandlerView
-{
-    BOOL _isMoving;
-}
+
+@synthesize moving = _isMoving;
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
     if ((self = [super initWithFrame:frame]))
     {
-        self.backgroundColor = [UIColor clearColor];
-        self.userInteractionEnabled = NO;
-        self.translatesAutoresizingMaskIntoConstraints = NO;
-
         if (1) {
             self.layer.borderColor = [UIColor greenColor].CGColor;
             self.layer.borderWidth = 1;
@@ -226,24 +274,50 @@ static inline CGPoint CGPointPlusPoint(CGPoint pt1, CGPoint pt2) {
 
 - (void)_internalInit
 {
-    _selectionView = [ZSelectionView new];
+	_minSelectionSize = CGSizeMake(70, 50);
+	
+	self.backgroundColor = [UIColor clearColor];
+	self.translatesAutoresizingMaskIntoConstraints = NO;
+
+	_selectionView = [ZSelectionView new];
     [self addSubview:self.selectionView];
 
     _handleView1 = [ZPinView new];
-    if (1) {
-        self.handleView1.tag = 1;
-    }
+	self.handleView1.pinKind = ZPinKindLeftTop;
     [self addSubview:self.handleView1];
 
     _handleView2 = [ZPinView new];
-    if (1) {
-        self.handleView2.tag = 2;
-        self.handleView2.pinColor = [UIColor redColor];
-    }
+	self.handleView2.pinKind = ZPinKindRightBottom;
     [self addSubview:self.handleView2];
 
     self.userInteractionEnabled = YES;
     [self setNeedsLayout];
+	
+	_tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapRecognizerAction:)];
+	[self addGestureRecognizer:self.tapRecognizer];
+	
+	_rulerViewVertical = [ZRulerView new];
+	self.rulerViewVertical.vertical = YES;
+	[self addSubview:self.rulerViewVertical];
+	
+	_rulerViewHorizontal = [ZRulerView new];
+	self.rulerViewHorizontal.vertical = NO;
+	[self addSubview:self.rulerViewHorizontal];
+	
+	
+	_selected = YES;
+	self.selected = NO;
+	
+	if (1) {
+		self.handleView2.pinColor = [UIColor redColor];
+		self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.1];
+	}
+}
+
+- (void)tapRecognizerAction:(UITapGestureRecognizer*)recognizer
+{
+	typeof(self.delegate) dlg = self.delegate;
+	[dlg gestureHandlerViewDidTap:self point:[recognizer locationInView:self]];
 }
 
 - (void)setSelectionRect:(CGRect)selectionRect
@@ -263,6 +337,15 @@ static inline CGPoint CGPointPlusPoint(CGPoint pt1, CGPoint pt2) {
     if (!_isMoving)
     {
         NSLog(@"layoutSubviews");
+		const CGRect bounds = self.bounds;
+		
+		CGRect frame = bounds;
+		frame.size = [self.rulerViewHorizontal sizeThatFits:frame.size];
+		self.rulerViewHorizontal.frame = frame;
+		
+		frame = bounds;
+		frame.size = [self.rulerViewVertical sizeThatFits:frame.size];
+		self.rulerViewVertical.frame = frame;
     }
 }
 
@@ -274,6 +357,9 @@ static inline CGPoint CGPointPlusPoint(CGPoint pt1, CGPoint pt2) {
     }
 
     _isMoving = YES;
+	
+	typeof(self.delegate) dlg = self.delegate;
+	[dlg gestureHandlerViewBeginsMoving:self];
 }
 
 - (void)subviewDidEndMoving:(UIView*)subview
@@ -287,25 +373,62 @@ static inline CGPoint CGPointPlusPoint(CGPoint pt1, CGPoint pt2) {
             //  normalize rect if needed
             const CGPoint point1 = self.handleView1.hotPoint;
             const CGPoint point2 = self.handleView2.hotPoint;
+			const CGPoint pointD = CGPointDelta(point2, point1);
 
-            BOOL normalize = NO;
+            short normalize = 0;
 
-            if (point1.x > point2.x) {
-                normalize = YES;
+            if (pointD.x < self.minSelectionSize.width) {
+                normalize |= 1;
             }
 
-            if (point1.y > point2.y) {
-                normalize = YES;
+            if (pointD.y < self.minSelectionSize.height) {
+				normalize |= 2;
             }
 
             if (normalize)
             {
-                const CGRect selectionRect = self.selectionRect;
-                [self setSelectionRect:selectionRect];
-                
+				CGRect selectionRect = self.selectionRect;
+				const CGFloat dx = selectionRect.size.width - self.minSelectionSize.width;
+				short resize = 0;
+				if (dx < 0) {
+					resize |= 1;
+					selectionRect.origin.x += dx * 0.5;
+					selectionRect.size.width = self.minSelectionSize.width;
+				}
+				
+				const CGFloat dy = selectionRect.size.height - self.minSelectionSize.height;
+				if (dy < 0) {
+					resize |= 2;
+					selectionRect.origin.y += dy * 0.5;
+					selectionRect.size.height = self.minSelectionSize.height;
+				}
+				
+				const BOOL swapAnime = ((3 == normalize) || (0 == normalize));
+				//TODO: doesnt work right
+				if (resize) {
+					[UIView animateWithDuration:0.25
+									 animations:^{
+										 self.selectionView.frame = selectionRect;
+									 }
+									 completion:^(BOOL finished) {
+										 [UIView animateWithDuration:(finished && swapAnime) ? 0.25 : 0 animations:^{
+											 self.handleView1.hotPoint = selectionRect.origin;
+											 self.handleView2.hotPoint = CGRectGetMaxXY(selectionRect);
+										 }];
+									 }];
+				}
+				else {
+					[UIView animateWithDuration:swapAnime ? 0.25 : 0 animations:^{
+						self.handleView1.hotPoint = selectionRect.origin;
+						self.handleView2.hotPoint = CGRectGetMaxXY(selectionRect);
+					}];
+				}
             }
         }
     }
+
+	typeof(self.delegate) dlg = self.delegate;
+	[dlg gestureHandlerViewEndsMoving:self];
 }
 
 - (void)subviewDidMove:(UIView*)subview
@@ -330,6 +453,9 @@ static inline CGPoint CGPointPlusPoint(CGPoint pt1, CGPoint pt2) {
         self.handleView1.hotPoint = selectionRect.origin;
         self.handleView2.hotPoint = CGRectGetMaxXY(selectionRect);
     }
+
+	typeof(self.delegate) dlg = self.delegate;
+	[dlg gestureHandlerViewMoved:self];
 }
 
 - (void)setSelected:(BOOL)selected
@@ -340,7 +466,19 @@ static inline CGPoint CGPointPlusPoint(CGPoint pt1, CGPoint pt2) {
         self.handleView1.selected = selected;
         self.handleView2.selected = selected;
         self.selectionView.selected = selected;
+		
+		const BOOL hidden = !selected;
+		self.handleView1.hidden = hidden;
+		self.handleView2.hidden = hidden;
+		self.selectionView.hidden = hidden;
+
     }
 }
+
+//- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
+//{
+//	UIView * view = [super hitTest:point withEvent:event];
+//	return (view == self) ? nil : view;
+//}
 
 @end

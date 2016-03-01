@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import "ZGestureHandlerVC.h"
+#import "ZEditorViewController.h"
+#import "ZGestureHandlerView.h"
 
 @interface AppDelegate ()
 
@@ -24,9 +26,17 @@
 //    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
 //    UIViewController* ctr = [sb instantiateViewControllerWithIdentifier:@"emptyVC"];
 
+	ZEditorViewController * rootVC = [ZEditorViewController new];
+	self.window.rootViewController = rootVC;
+	[self.window makeKeyAndVisible];
 
     self.window.translatesAutoresizingMaskIntoConstraints = YES;
-    [self performSelector:@selector(addGestureHandler) withObject:nil afterDelay:0.1];
+	[self addGestureHandler];
+	
+	_gestureHandlerVC.gestureHandlerView.delegate = rootVC;
+	rootVC.gestureHandlerView = _gestureHandlerVC.gestureHandlerView;
+	
+//    [self performSelector:@selector(addGestureHandler) withObject:nil afterDelay:0.1];
 
     return YES;
 }
