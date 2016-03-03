@@ -13,12 +13,11 @@
 
 @interface AppDelegate ()
 
+@property (nonatomic, strong) ZGestureHandlerVC *gestureHandlerVC;
+
 @end
 
 @implementation AppDelegate
-{
-    ZGestureHandlerVC *_gestureHandlerVC;
-}
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -33,8 +32,15 @@
     self.window.translatesAutoresizingMaskIntoConstraints = YES;
 	[self addGestureHandler];
 	
-	_gestureHandlerVC.gestureHandlerView.delegate = rootVC;
-	rootVC.gestureHandlerView = _gestureHandlerVC.gestureHandlerView;
+	self.gestureHandlerVC.gestureHandlerView.delegate = rootVC;
+	rootVC.gestureHandlerView = self.gestureHandlerVC.gestureHandlerView;
+	
+	//	move scroll recognizers
+//	NSArray* scrollRecognizers = rootVC.scrollView.gestureRecognizers;
+//	for (UIGestureRecognizer * aRecognizer in scrollRecognizers) {
+//		[rootVC.scrollView removeGestureRecognizer:aRecognizer];
+//		[self.gestureHandlerVC.view addGestureRecognizer:aRecognizer];
+//	}
 	
 //    [self performSelector:@selector(addGestureHandler) withObject:nil afterDelay:0.1];
 
