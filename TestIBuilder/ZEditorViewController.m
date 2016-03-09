@@ -10,11 +10,14 @@
 #import "ZBasicObjectView.h"
 #import "ZCanvasView.h"
 #import "ZGestureHandlerView.h"
+#import "ZScrollView.h"
 
 @interface ZEditorViewController () <UIScrollViewDelegate>
 @property (nonatomic, weak) UIScrollView * scrollView;
 @property (nonatomic, strong) ZCanvasView * canvasView;
 @end
+
+const CGSize CanvasSize = {800, 800};
 
 @implementation ZEditorViewController
 
@@ -25,15 +28,17 @@
 
 - (void)loadView
 {
-	UIScrollView * scroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+	UIScrollView * scroll = [[ZScrollView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
 	scroll.delegate = self;
 	self.view = scroll;
 	
-	_canvasView = [[ZCanvasView alloc] initWithFrame:CGRectMake(0, 0, 800, 800)];
+	_canvasView = [[ZCanvasView alloc] initWithFrame:CGRectMake(0, 0, CanvasSize.width, CanvasSize.height)];
 	[scroll addSubview:self.canvasView];
 	scroll.contentSize = self.canvasView.frame.size;
 	scroll.minimumZoomScale = 0.3;
 	scroll.maximumZoomScale = 3;
+
+    
 }
 
 - (void)viewDidLoad {
@@ -77,7 +82,55 @@
 
 - (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale
 {
-	
+    NSLog(@"%2.2f", scale);
+    NSLog(@"%@", scrollView);
+    NSLog(@"%@", view);
+
+    return;
+
+    const CGSize scrollViewSize = scrollView.frame.size;
+    const CGSize scaledCanvasSize = CGSizeMake(CanvasSize.width * scale, CanvasSize.height * scale);
+
+
+    CGRect contentRect = CGRectZero; // contentOffset & contentSize
+    BOOL shouldUpdate = NO;
+
+
+
+    const CGFloat deltaW = scrollViewSize.width - scaledCanvasSize.width;
+    if (deltaW > 0) {
+        contentRect.size.width = scaledCanvasSize.width;
+        contentRect.origin.x = -deltaW/2.0;
+        shouldUpdate = YES;
+    }
+
+    const CGFloat deltaH = scrollViewSize.height - scaledCanvasSize.height;
+    if (deltaH > 0) {
+        contentRect.size.height = scaledCanvasSize.height;
+        contentRect.origin.y = -deltaH/2.0;
+        shouldUpdate = YES;
+    }
+
+
+
+    if (shouldUpdate) {
+        NSValue * value = [NSValue valueWithCGRect:contentRect];
+        [self performSelector:@selector(updateSccrollWithContentRect:) withObject:value afterDelay:0];
+    }
+}
+
+- (void)updateSccrollWithContentRect:(NSValue*)contentRectValue
+{
+    const CGRect contentRect = [contentRectValue CGRectValue];
+    [UIView animateWithDuration:0.25 animations:^{
+        self.scrollView.contentSize = contentRect.size;
+        self.scrollView.contentOffset = contentRect.origin;
+    }];
+}
+
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
+{
+    NSLog(@"111");
 }
 
 #pragma mark - ZGestureHandlerViewDelegate
