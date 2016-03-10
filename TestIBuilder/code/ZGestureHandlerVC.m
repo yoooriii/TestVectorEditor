@@ -9,6 +9,13 @@
 #import "ZGestureHandlerVC.h"
 #import "ZGestureHandlerView.h"
 
+@interface ZGestureHandlerVC () <UIGestureRecognizerDelegate>
+
+@property (nonatomic, strong) NSArray<UIGestureRecognizer*>* scrollRecognizers;
+
+@end
+
+
 @implementation ZGestureHandlerVC
 
 - (void)loadView
@@ -56,4 +63,8 @@
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[one(height)]-|" options:0 metrics:metrics views:views]];
 }
 
+- (void)handleScrollRecognizers:(NSArray<UIGestureRecognizer*>*)scrollRecognizers
+{
+	self.scrollRecognizers = scrollRecognizers;
+}
 @end

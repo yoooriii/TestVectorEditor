@@ -13,5 +13,6 @@
 @interface ZGestureHandlerVC : UIViewController
 
 @property (nonatomic, readonly) ZGestureHandlerView * gestureHandlerView;
+- (void)handleScrollRecognizers:(NSArray<UIGestureRecognizer*>*)scrollRecognizers;
 
 @end
