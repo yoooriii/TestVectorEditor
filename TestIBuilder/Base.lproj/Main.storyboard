@@ -326,6 +326,35 @@
             </objects>
             <point key="canvasLocation" x="239" y="291"/>
         </scene>
+        <!--IB Glass example-->
+        <scene sceneID="dlb-9v-H12">
+            <objects>
+                <viewController id="fWS-qc-i8W" userLabel="IB Glass example" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wQN-7x-YOI"/>
+                        <viewControllerLayoutGuide type="bottom" id="rwi-vT-nJU"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="g9J-QS-uNN" customClass="ZGlassView">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="fillColor">
+                                <color key="value" red="1" green="0.92837701829999997" blue="0.16225775470000001" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="strokeColor">
+                                <color key="value" red="0.078660775769999997" green="0.83838383839999997" blue="0.05653151914" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="lineWidth">
+                                <real key="value" value="13"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9PL-oW-dnq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
     </scenes>
     <resources>
         <image name="fm_tb_add_icon.png" width="49" height="49"/>

@@ -475,10 +475,10 @@ typedef NS_ENUM(NSUInteger, ZPinKind)
     }
 }
 
-//- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
-//{
-//	UIView * view = [super hitTest:point withEvent:event];
-//	return (view == self) ? nil : view;
-//}
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
+{
+    UIView * hitView = [super hitTest:point withEvent:event];
+    return (self == hitView) ? nil : hitView;
+}
 
 @end
