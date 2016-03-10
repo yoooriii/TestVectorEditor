@@ -13,14 +13,14 @@
 		E20352D61C804EB400091789 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E20352D41C804EB400091789 /* Main.storyboard */; };
 		E20352D81C804EB400091789 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E20352D71C804EB400091789 /* Assets.xcassets */; };
 		E20352DB1C804EB400091789 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E20352D91C804EB400091789 /* LaunchScreen.storyboard */; };
-		E20352E41C844C1A00091789 /* ZGestureHandlerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E20352E31C844C1A00091789 /* ZGestureHandlerVC.m */; };
-		E20352E71C844C8C00091789 /* ZGestureHandlerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E20352E61C844C8C00091789 /* ZGestureHandlerView.m */; };
-		E25E66571C902C8100C49CE9 /* ZGlassView.m in Sources */ = {isa = PBXBuildFile; fileRef = E25E66561C902C8100C49CE9 /* ZGlassView.m */; };
-		E25E665A1C9035B000C49CE9 /* ZScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = E25E66591C9035B000C49CE9 /* ZScrollView.m */; };
-		E2E8D4491C84E1F300FA9947 /* ZCanvasView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2E8D4481C84E1F300FA9947 /* ZCanvasView.m */; };
-		E2E8D44C1C84E21C00FA9947 /* ZBasicObjectView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2E8D44B1C84E21C00FA9947 /* ZBasicObjectView.m */; };
-		E2E8D44F1C84E78100FA9947 /* ZEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2E8D44E1C84E78100FA9947 /* ZEditorViewController.m */; };
-		E2E8D4531C85031C00FA9947 /* ZRulerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2E8D4521C85031C00FA9947 /* ZRulerView.m */; };
+		E27C984A1C920D1700B2E0D0 /* ZBasicObjectView.m in Sources */ = {isa = PBXBuildFile; fileRef = E27C983C1C920D1700B2E0D0 /* ZBasicObjectView.m */; };
+		E27C984B1C920D1700B2E0D0 /* ZCanvasView.m in Sources */ = {isa = PBXBuildFile; fileRef = E27C983E1C920D1700B2E0D0 /* ZCanvasView.m */; };
+		E27C984C1C920D1700B2E0D0 /* ZEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E27C98401C920D1700B2E0D0 /* ZEditorViewController.m */; };
+		E27C984D1C920D1700B2E0D0 /* ZGestureHandlerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E27C98421C920D1700B2E0D0 /* ZGestureHandlerVC.m */; };
+		E27C984E1C920D1700B2E0D0 /* ZGestureHandlerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E27C98441C920D1700B2E0D0 /* ZGestureHandlerView.m */; };
+		E27C984F1C920D1700B2E0D0 /* ZGlassView.m in Sources */ = {isa = PBXBuildFile; fileRef = E27C98471C920D1700B2E0D0 /* ZGlassView.m */; };
+		E27C98501C920D1700B2E0D0 /* ZRulerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E27C98491C920D1700B2E0D0 /* ZRulerView.m */; };
+		E27C98531C920D7100B2E0D0 /* ZScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = E27C98521C920D7100B2E0D0 /* ZScrollView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,23 +34,23 @@
 		E20352D71C804EB400091789 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E20352DA1C804EB400091789 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E20352DC1C804EB400091789 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E20352E21C844C1A00091789 /* ZGestureHandlerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZGestureHandlerVC.h; sourceTree = "<group>"; };
-		E20352E31C844C1A00091789 /* ZGestureHandlerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZGestureHandlerVC.m; sourceTree = "<group>"; };
-		E20352E51C844C8C00091789 /* ZGestureHandlerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZGestureHandlerView.h; sourceTree = "<group>"; };
-		E20352E61C844C8C00091789 /* ZGestureHandlerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZGestureHandlerView.m; sourceTree = "<group>"; };
-		E25E66551C902C8100C49CE9 /* ZGlassView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZGlassView.h; path = code/ZGlassView.h; sourceTree = "<group>"; };
-		E25E66561C902C8100C49CE9 /* ZGlassView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZGlassView.m; path = code/ZGlassView.m; sourceTree = "<group>"; };
-		E25E66581C9035B000C49CE9 /* ZScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZScrollView.h; sourceTree = "<group>"; };
-		E25E66591C9035B000C49CE9 /* ZScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZScrollView.m; sourceTree = "<group>"; };
-		E2E8D4471C84E1F300FA9947 /* ZCanvasView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZCanvasView.h; sourceTree = "<group>"; };
-		E2E8D4481C84E1F300FA9947 /* ZCanvasView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZCanvasView.m; sourceTree = "<group>"; };
-		E2E8D44A1C84E21C00FA9947 /* ZBasicObjectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBasicObjectView.h; sourceTree = "<group>"; };
-		E2E8D44B1C84E21C00FA9947 /* ZBasicObjectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZBasicObjectView.m; sourceTree = "<group>"; };
-		E2E8D44D1C84E78100FA9947 /* ZEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZEditorViewController.h; sourceTree = "<group>"; };
-		E2E8D44E1C84E78100FA9947 /* ZEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZEditorViewController.m; sourceTree = "<group>"; };
-		E2E8D4501C84EB0100FA9947 /* ZGestureHandlerViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZGestureHandlerViewDelegate.h; sourceTree = "<group>"; };
-		E2E8D4511C85031C00FA9947 /* ZRulerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZRulerView.h; sourceTree = "<group>"; };
-		E2E8D4521C85031C00FA9947 /* ZRulerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZRulerView.m; sourceTree = "<group>"; };
+		E27C983B1C920D1700B2E0D0 /* ZBasicObjectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBasicObjectView.h; sourceTree = "<group>"; };
+		E27C983C1C920D1700B2E0D0 /* ZBasicObjectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZBasicObjectView.m; sourceTree = "<group>"; };
+		E27C983D1C920D1700B2E0D0 /* ZCanvasView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZCanvasView.h; sourceTree = "<group>"; };
+		E27C983E1C920D1700B2E0D0 /* ZCanvasView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZCanvasView.m; sourceTree = "<group>"; };
+		E27C983F1C920D1700B2E0D0 /* ZEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZEditorViewController.h; sourceTree = "<group>"; };
+		E27C98401C920D1700B2E0D0 /* ZEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZEditorViewController.m; sourceTree = "<group>"; };
+		E27C98411C920D1700B2E0D0 /* ZGestureHandlerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZGestureHandlerVC.h; sourceTree = "<group>"; };
+		E27C98421C920D1700B2E0D0 /* ZGestureHandlerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZGestureHandlerVC.m; sourceTree = "<group>"; };
+		E27C98431C920D1700B2E0D0 /* ZGestureHandlerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZGestureHandlerView.h; sourceTree = "<group>"; };
+		E27C98441C920D1700B2E0D0 /* ZGestureHandlerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZGestureHandlerView.m; sourceTree = "<group>"; };
+		E27C98451C920D1700B2E0D0 /* ZGestureHandlerViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZGestureHandlerViewDelegate.h; sourceTree = "<group>"; };
+		E27C98461C920D1700B2E0D0 /* ZGlassView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZGlassView.h; sourceTree = "<group>"; };
+		E27C98471C920D1700B2E0D0 /* ZGlassView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZGlassView.m; sourceTree = "<group>"; };
+		E27C98481C920D1700B2E0D0 /* ZRulerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZRulerView.h; sourceTree = "<group>"; };
+		E27C98491C920D1700B2E0D0 /* ZRulerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZRulerView.m; sourceTree = "<group>"; };
+		E27C98511C920D7100B2E0D0 /* ZScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZScrollView.h; sourceTree = "<group>"; };
+		E27C98521C920D7100B2E0D0 /* ZScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZScrollView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,7 +83,7 @@
 		E20352CA1C804EB400091789 /* TestIBuilder */ = {
 			isa = PBXGroup;
 			children = (
-				E25E66541C902C5300C49CE9 /* code */,
+				E27C983A1C920D1700B2E0D0 /* code */,
 				E20352CE1C804EB400091789 /* AppDelegate.h */,
 				E20352CF1C804EB400091789 /* AppDelegate.m */,
 				E20352D11C804EB400091789 /* ViewController.h */,
@@ -93,8 +93,6 @@
 				E20352D91C804EB400091789 /* LaunchScreen.storyboard */,
 				E20352DC1C804EB400091789 /* Info.plist */,
 				E20352CB1C804EB400091789 /* Supporting Files */,
-				E20352E21C844C1A00091789 /* ZGestureHandlerVC.h */,
-				E20352E31C844C1A00091789 /* ZGestureHandlerVC.m */,
 			);
 			path = TestIBuilder;
 			sourceTree = "<group>";
@@ -107,26 +105,28 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		E25E66541C902C5300C49CE9 /* code */ = {
+		E27C983A1C920D1700B2E0D0 /* code */ = {
 			isa = PBXGroup;
 			children = (
-				E20352E51C844C8C00091789 /* ZGestureHandlerView.h */,
-				E20352E61C844C8C00091789 /* ZGestureHandlerView.m */,
-				E2E8D4501C84EB0100FA9947 /* ZGestureHandlerViewDelegate.h */,
-				E2E8D4471C84E1F300FA9947 /* ZCanvasView.h */,
-				E2E8D4481C84E1F300FA9947 /* ZCanvasView.m */,
-				E2E8D44A1C84E21C00FA9947 /* ZBasicObjectView.h */,
-				E2E8D44B1C84E21C00FA9947 /* ZBasicObjectView.m */,
-				E2E8D44D1C84E78100FA9947 /* ZEditorViewController.h */,
-				E2E8D44E1C84E78100FA9947 /* ZEditorViewController.m */,
-				E2E8D4511C85031C00FA9947 /* ZRulerView.h */,
-				E2E8D4521C85031C00FA9947 /* ZRulerView.m */,
-				E25E66551C902C8100C49CE9 /* ZGlassView.h */,
-				E25E66561C902C8100C49CE9 /* ZGlassView.m */,
-				E25E66581C9035B000C49CE9 /* ZScrollView.h */,
-				E25E66591C9035B000C49CE9 /* ZScrollView.m */,
+				E27C98511C920D7100B2E0D0 /* ZScrollView.h */,
+				E27C98521C920D7100B2E0D0 /* ZScrollView.m */,
+				E27C983B1C920D1700B2E0D0 /* ZBasicObjectView.h */,
+				E27C983C1C920D1700B2E0D0 /* ZBasicObjectView.m */,
+				E27C983D1C920D1700B2E0D0 /* ZCanvasView.h */,
+				E27C983E1C920D1700B2E0D0 /* ZCanvasView.m */,
+				E27C983F1C920D1700B2E0D0 /* ZEditorViewController.h */,
+				E27C98401C920D1700B2E0D0 /* ZEditorViewController.m */,
+				E27C98411C920D1700B2E0D0 /* ZGestureHandlerVC.h */,
+				E27C98421C920D1700B2E0D0 /* ZGestureHandlerVC.m */,
+				E27C98431C920D1700B2E0D0 /* ZGestureHandlerView.h */,
+				E27C98441C920D1700B2E0D0 /* ZGestureHandlerView.m */,
+				E27C98451C920D1700B2E0D0 /* ZGestureHandlerViewDelegate.h */,
+				E27C98461C920D1700B2E0D0 /* ZGlassView.h */,
+				E27C98471C920D1700B2E0D0 /* ZGlassView.m */,
+				E27C98481C920D1700B2E0D0 /* ZRulerView.h */,
+				E27C98491C920D1700B2E0D0 /* ZRulerView.m */,
 			);
-			name = code;
+			path = code;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -200,16 +200,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				E20352D31C804EB400091789 /* ViewController.m in Sources */,
-				E25E665A1C9035B000C49CE9 /* ZScrollView.m in Sources */,
+				E27C98531C920D7100B2E0D0 /* ZScrollView.m in Sources */,
 				E20352D01C804EB400091789 /* AppDelegate.m in Sources */,
-				E2E8D44F1C84E78100FA9947 /* ZEditorViewController.m in Sources */,
-				E20352E41C844C1A00091789 /* ZGestureHandlerVC.m in Sources */,
-				E25E66571C902C8100C49CE9 /* ZGlassView.m in Sources */,
-				E20352E71C844C8C00091789 /* ZGestureHandlerView.m in Sources */,
+				E27C98501C920D1700B2E0D0 /* ZRulerView.m in Sources */,
+				E27C984C1C920D1700B2E0D0 /* ZEditorViewController.m in Sources */,
+				E27C984F1C920D1700B2E0D0 /* ZGlassView.m in Sources */,
 				E20352CD1C804EB400091789 /* main.m in Sources */,
-				E2E8D4491C84E1F300FA9947 /* ZCanvasView.m in Sources */,
-				E2E8D4531C85031C00FA9947 /* ZRulerView.m in Sources */,
-				E2E8D44C1C84E21C00FA9947 /* ZBasicObjectView.m in Sources */,
+				E27C984A1C920D1700B2E0D0 /* ZBasicObjectView.m in Sources */,
+				E27C984E1C920D1700B2E0D0 /* ZGestureHandlerView.m in Sources */,
+				E27C984D1C920D1700B2E0D0 /* ZGestureHandlerVC.m in Sources */,
+				E27C984B1C920D1700B2E0D0 /* ZCanvasView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
