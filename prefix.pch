@@ -1,0 +1,20 @@
+//
+//  prefix.pch
+//  TestIBuilder
+//
+//  Created by Yu Lo on 3/14/16.
+//  Copyright © 2016 leonid lo. All rights reserved.
+//
+
+#ifndef prefix_h
+#define prefix_h
+
+#import <UIKit/UIKit.h>
+
+#ifdef DEBUG
+#	define  LLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+#else
+#	define  LLog(...)
+#endif
+
+#endif /* prefix_h */

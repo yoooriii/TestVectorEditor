@@ -17,13 +17,18 @@
 		E27C984B1C920D1700B2E0D0 /* ZCanvasView.m in Sources */ = {isa = PBXBuildFile; fileRef = E27C983E1C920D1700B2E0D0 /* ZCanvasView.m */; };
 		E27C984C1C920D1700B2E0D0 /* ZEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E27C98401C920D1700B2E0D0 /* ZEditorViewController.m */; };
 		E27C984D1C920D1700B2E0D0 /* ZGestureHandlerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E27C98421C920D1700B2E0D0 /* ZGestureHandlerVC.m */; };
-		E27C984E1C920D1700B2E0D0 /* ZGestureHandlerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E27C98441C920D1700B2E0D0 /* ZGestureHandlerView.m */; };
 		E27C984F1C920D1700B2E0D0 /* ZGlassView.m in Sources */ = {isa = PBXBuildFile; fileRef = E27C98471C920D1700B2E0D0 /* ZGlassView.m */; };
 		E27C98501C920D1700B2E0D0 /* ZRulerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E27C98491C920D1700B2E0D0 /* ZRulerView.m */; };
 		E27C98531C920D7100B2E0D0 /* ZScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = E27C98521C920D7100B2E0D0 /* ZScrollView.m */; };
 		E2BA88041C9374D5009B2CA0 /* TestIBuilderUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = E2BA88031C9374D5009B2CA0 /* TestIBuilderUITests.m */; };
 		E2BA880E1C961030009B2CA0 /* ZMainPaintVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E2BA880D1C961030009B2CA0 /* ZMainPaintVC.m */; };
 		E2BA88111C961149009B2CA0 /* ZKeepResizeContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2BA88101C961149009B2CA0 /* ZKeepResizeContentView.m */; };
+		E2BA88151C961BBB009B2CA0 /* ZGestureHandlerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2BA88131C961BBB009B2CA0 /* ZGestureHandlerView.m */; };
+		E2BA881A1C961C90009B2CA0 /* ZzBarcodePlainFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = E2BA88191C961C90009B2CA0 /* ZzBarcodePlainFunctions.m */; };
+		E2BA881D1C961CCB009B2CA0 /* ZzBarcodesCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = E2BA881C1C961CCB009B2CA0 /* ZzBarcodesCommon.m */; };
+		E2BA881F1C961CF5009B2CA0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2BA881E1C961CF5009B2CA0 /* CoreGraphics.framework */; };
+		E2BA88231C96203B009B2CA0 /* ZzBarcodeRender.m in Sources */ = {isa = PBXBuildFile; fileRef = E2BA88221C96203B009B2CA0 /* ZzBarcodeRender.m */; };
+		E2BA88261C96228A009B2CA0 /* ZBarcode.m in Sources */ = {isa = PBXBuildFile; fileRef = E2BA88251C96228A009B2CA0 /* ZBarcode.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,9 +60,6 @@
 		E27C98401C920D1700B2E0D0 /* ZEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZEditorViewController.m; sourceTree = "<group>"; };
 		E27C98411C920D1700B2E0D0 /* ZGestureHandlerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZGestureHandlerVC.h; sourceTree = "<group>"; };
 		E27C98421C920D1700B2E0D0 /* ZGestureHandlerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZGestureHandlerVC.m; sourceTree = "<group>"; };
-		E27C98431C920D1700B2E0D0 /* ZGestureHandlerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZGestureHandlerView.h; sourceTree = "<group>"; };
-		E27C98441C920D1700B2E0D0 /* ZGestureHandlerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZGestureHandlerView.m; sourceTree = "<group>"; };
-		E27C98451C920D1700B2E0D0 /* ZGestureHandlerViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZGestureHandlerViewDelegate.h; sourceTree = "<group>"; };
 		E27C98461C920D1700B2E0D0 /* ZGlassView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZGlassView.h; sourceTree = "<group>"; };
 		E27C98471C920D1700B2E0D0 /* ZGlassView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZGlassView.m; sourceTree = "<group>"; };
 		E27C98481C920D1700B2E0D0 /* ZRulerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZRulerView.h; sourceTree = "<group>"; };
@@ -71,6 +73,19 @@
 		E2BA880D1C961030009B2CA0 /* ZMainPaintVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZMainPaintVC.m; sourceTree = "<group>"; };
 		E2BA880F1C961149009B2CA0 /* ZKeepResizeContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKeepResizeContentView.h; sourceTree = "<group>"; };
 		E2BA88101C961149009B2CA0 /* ZKeepResizeContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKeepResizeContentView.m; sourceTree = "<group>"; };
+		E2BA88121C961BBB009B2CA0 /* ZGestureHandlerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZGestureHandlerView.h; sourceTree = "<group>"; };
+		E2BA88131C961BBB009B2CA0 /* ZGestureHandlerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZGestureHandlerView.m; sourceTree = "<group>"; };
+		E2BA88141C961BBB009B2CA0 /* ZGestureHandlerViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZGestureHandlerViewDelegate.h; sourceTree = "<group>"; };
+		E2BA88181C961C90009B2CA0 /* ZzBarcodePlainFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZzBarcodePlainFunctions.h; sourceTree = "<group>"; };
+		E2BA88191C961C90009B2CA0 /* ZzBarcodePlainFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZzBarcodePlainFunctions.m; sourceTree = "<group>"; };
+		E2BA881B1C961CCB009B2CA0 /* ZzBarcodesCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZzBarcodesCommon.h; sourceTree = "<group>"; };
+		E2BA881C1C961CCB009B2CA0 /* ZzBarcodesCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZzBarcodesCommon.m; sourceTree = "<group>"; };
+		E2BA881E1C961CF5009B2CA0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		E2BA88201C961DEA009B2CA0 /* prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = prefix.pch; sourceTree = "<group>"; };
+		E2BA88211C96203B009B2CA0 /* ZzBarcodeRender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZzBarcodeRender.h; sourceTree = "<group>"; };
+		E2BA88221C96203B009B2CA0 /* ZzBarcodeRender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZzBarcodeRender.m; sourceTree = "<group>"; };
+		E2BA88241C96228A009B2CA0 /* ZBarcode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBarcode.h; sourceTree = "<group>"; };
+		E2BA88251C96228A009B2CA0 /* ZBarcode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZBarcode.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2BA881F1C961CF5009B2CA0 /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,6 +110,8 @@
 		E20352BF1C804EB400091789 = {
 			isa = PBXGroup;
 			children = (
+				E2BA88201C961DEA009B2CA0 /* prefix.pch */,
+				E2BA881E1C961CF5009B2CA0 /* CoreGraphics.framework */,
 				E20352CA1C804EB400091789 /* TestIBuilder */,
 				E2BA88021C9374D5009B2CA0 /* TestIBuilderUITests */,
 				E20352C91C804EB400091789 /* Products */,
@@ -112,6 +130,7 @@
 		E20352CA1C804EB400091789 /* TestIBuilder */ = {
 			isa = PBXGroup;
 			children = (
+				E2BA88161C961C90009B2CA0 /* libs */,
 				E2BA880B1C96100B009B2CA0 /* code2 */,
 				E27C983A1C920D1700B2E0D0 /* code */,
 				E20352CE1C804EB400091789 /* AppDelegate.h */,
@@ -148,9 +167,6 @@
 				E27C98401C920D1700B2E0D0 /* ZEditorViewController.m */,
 				E27C98411C920D1700B2E0D0 /* ZGestureHandlerVC.h */,
 				E27C98421C920D1700B2E0D0 /* ZGestureHandlerVC.m */,
-				E27C98431C920D1700B2E0D0 /* ZGestureHandlerView.h */,
-				E27C98441C920D1700B2E0D0 /* ZGestureHandlerView.m */,
-				E27C98451C920D1700B2E0D0 /* ZGestureHandlerViewDelegate.h */,
 				E27C98461C920D1700B2E0D0 /* ZGlassView.h */,
 				E27C98471C920D1700B2E0D0 /* ZGlassView.m */,
 				E27C98481C920D1700B2E0D0 /* ZRulerView.h */,
@@ -171,12 +187,38 @@
 		E2BA880B1C96100B009B2CA0 /* code2 */ = {
 			isa = PBXGroup;
 			children = (
+				E2BA88121C961BBB009B2CA0 /* ZGestureHandlerView.h */,
+				E2BA88131C961BBB009B2CA0 /* ZGestureHandlerView.m */,
+				E2BA88141C961BBB009B2CA0 /* ZGestureHandlerViewDelegate.h */,
 				E2BA880C1C961030009B2CA0 /* ZMainPaintVC.h */,
 				E2BA880D1C961030009B2CA0 /* ZMainPaintVC.m */,
 				E2BA880F1C961149009B2CA0 /* ZKeepResizeContentView.h */,
 				E2BA88101C961149009B2CA0 /* ZKeepResizeContentView.m */,
 			);
 			path = code2;
+			sourceTree = "<group>";
+		};
+		E2BA88161C961C90009B2CA0 /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				E2BA88171C961C90009B2CA0 /* barcode */,
+			);
+			path = libs;
+			sourceTree = "<group>";
+		};
+		E2BA88171C961C90009B2CA0 /* barcode */ = {
+			isa = PBXGroup;
+			children = (
+				E2BA881B1C961CCB009B2CA0 /* ZzBarcodesCommon.h */,
+				E2BA881C1C961CCB009B2CA0 /* ZzBarcodesCommon.m */,
+				E2BA88181C961C90009B2CA0 /* ZzBarcodePlainFunctions.h */,
+				E2BA88191C961C90009B2CA0 /* ZzBarcodePlainFunctions.m */,
+				E2BA88211C96203B009B2CA0 /* ZzBarcodeRender.h */,
+				E2BA88221C96203B009B2CA0 /* ZzBarcodeRender.m */,
+				E2BA88241C96228A009B2CA0 /* ZBarcode.h */,
+				E2BA88251C96228A009B2CA0 /* ZBarcode.m */,
+			);
+			path = barcode;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -279,15 +321,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2BA88231C96203B009B2CA0 /* ZzBarcodeRender.m in Sources */,
 				E20352D31C804EB400091789 /* ViewController.m in Sources */,
 				E27C98531C920D7100B2E0D0 /* ZScrollView.m in Sources */,
 				E20352D01C804EB400091789 /* AppDelegate.m in Sources */,
+				E2BA88261C96228A009B2CA0 /* ZBarcode.m in Sources */,
 				E27C98501C920D1700B2E0D0 /* ZRulerView.m in Sources */,
 				E27C984C1C920D1700B2E0D0 /* ZEditorViewController.m in Sources */,
+				E2BA881A1C961C90009B2CA0 /* ZzBarcodePlainFunctions.m in Sources */,
+				E2BA88151C961BBB009B2CA0 /* ZGestureHandlerView.m in Sources */,
+				E2BA881D1C961CCB009B2CA0 /* ZzBarcodesCommon.m in Sources */,
 				E27C984F1C920D1700B2E0D0 /* ZGlassView.m in Sources */,
 				E20352CD1C804EB400091789 /* main.m in Sources */,
 				E27C984A1C920D1700B2E0D0 /* ZBasicObjectView.m in Sources */,
-				E27C984E1C920D1700B2E0D0 /* ZGestureHandlerView.m in Sources */,
 				E2BA880E1C961030009B2CA0 /* ZMainPaintVC.m in Sources */,
 				E2BA88111C961149009B2CA0 /* ZKeepResizeContentView.m in Sources */,
 				E27C984D1C920D1700B2E0D0 /* ZGestureHandlerVC.m in Sources */,
@@ -417,6 +463,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "CONSOLE_APP=1";
 				INFOPLIST_FILE = TestIBuilder/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "horns-hoofs.TestIBuilder";
@@ -428,6 +477,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "CONSOLE_APP=1";
 				INFOPLIST_FILE = TestIBuilder/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "horns-hoofs.TestIBuilder";
