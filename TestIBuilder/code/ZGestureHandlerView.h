@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "ZGestureHandlerViewDelegate.h"
+#import "ZGlassView.h"
 
-@interface ZGestureHandlerView : UIView
+@interface ZGestureHandlerView : ZGlassView// UIView
 //  touch to select an object
 //  touch a handler to resize/move a selected object
 @property (nonatomic, weak) id<ZGestureHandlerViewDelegate>	delegate;

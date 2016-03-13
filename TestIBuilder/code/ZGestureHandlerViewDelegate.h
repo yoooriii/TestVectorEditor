@@ -13,6 +13,5 @@
 - (void)gestureHandlerViewBeginsMoving:(ZGestureHandlerView*)view;
 - (void)gestureHandlerViewMoved:(ZGestureHandlerView*)view;
 - (void)gestureHandlerViewEndsMoving:(ZGestureHandlerView*)view;
-- (void)gestureHandlerViewDidTap:(ZGestureHandlerView*)view point:(CGPoint)point;
 
 @end

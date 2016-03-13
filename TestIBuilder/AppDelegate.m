@@ -11,6 +11,9 @@
 #import "ZEditorViewController.h"
 #import "ZGestureHandlerView.h"
 
+#import "ZMainPaintVC.h"
+
+
 @interface AppDelegate ()
 
 @property (nonatomic, strong) ZGestureHandlerVC *gestureHandlerVC;
@@ -21,6 +24,12 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+	
+	ZMainPaintVC * paintVC = [ZMainPaintVC new];
+	self.window.rootViewController = paintVC;
+	[self.window makeKeyAndVisible];
+	return YES;
+	
 
 //    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
 //    UIViewController* ctr = [sb instantiateViewControllerWithIdentifier:@"emptyVC"];

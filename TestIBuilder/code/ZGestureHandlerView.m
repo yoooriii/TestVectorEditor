@@ -53,7 +53,6 @@ typedef NS_ENUM(NSUInteger, ZPinKind)
 @property (nonatomic, strong) ZPinView *handleView2;
 @property (nonatomic, strong) ZSelectionView *selectionView;
 @property (nonatomic, assign) BOOL disableNormalization;
-@property (nonatomic, strong) UITapGestureRecognizer * tapRecognizer;
 @property (nonatomic, strong) ZRulerView *rulerViewVertical;
 @property (nonatomic, strong) ZRulerView *rulerViewHorizontal;
 - (void)subviewDidBeginMoving:(UIView*)subview;
@@ -293,9 +292,6 @@ typedef NS_ENUM(NSUInteger, ZPinKind)
     self.userInteractionEnabled = YES;
     [self setNeedsLayout];
 	
-	_tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapRecognizerAction:)];
-	[self addGestureRecognizer:self.tapRecognizer];
-	
 	_rulerViewVertical = [ZRulerView new];
 	self.rulerViewVertical.vertical = YES;
 	[self addSubview:self.rulerViewVertical];
@@ -312,12 +308,6 @@ typedef NS_ENUM(NSUInteger, ZPinKind)
 		self.handleView2.pinColor = [UIColor redColor];
 		self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.1];
 	}
-}
-
-- (void)tapRecognizerAction:(UITapGestureRecognizer*)recognizer
-{
-	typeof(self.delegate) dlg = self.delegate;
-	[dlg gestureHandlerViewDidTap:self point:[recognizer locationInView:self]];
 }
 
 - (void)setSelectionRect:(CGRect)selectionRect

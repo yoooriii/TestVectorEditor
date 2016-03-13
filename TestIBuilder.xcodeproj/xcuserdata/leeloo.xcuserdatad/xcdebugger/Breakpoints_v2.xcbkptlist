@@ -41,13 +41,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TestIBuilder/code/ZGlassView.m"
-            timestampString = "479219096.664437"
+            filePath = "TestIBuilderUITests/TestIBuilderUITests.m"
+            timestampString = "479425810.761399"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
-            landmarkName = "-drawRect:"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "-testExample"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
