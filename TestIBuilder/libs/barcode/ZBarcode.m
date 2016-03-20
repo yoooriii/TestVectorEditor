@@ -48,7 +48,7 @@ ZBarcodeErrorCode errorCodeWithSymbology(ZBarcodeType symbology)
 
 @interface ZBarcode ()
 
-@property (nonatomic, readonly) NSMutableArray	*stringToShowSubitems;
+@property (nonatomic, readonly) NSMutableArray<ZBarTextItem*>* stringToShowSubitems;
 
 @end
 
@@ -105,6 +105,13 @@ ZBarcodeErrorCode errorCodeWithSymbology(ZBarcodeType symbology)
 
 
 #pragma mark - encoding
+
+- (ZBarcodeErrorCode)encodeIfNeeded {
+	if (ZBarcodeErrorCodeInvalid == self.encodingError) {
+		self.encodingError = [self encode];
+	}
+	return self.encodingError;
+}
 
 - (ZBarcodeErrorCode)encode
 {
@@ -369,12 +376,18 @@ ZBarcodeErrorCode errorCodeWithSymbology(ZBarcodeType symbology)
 		|| (self.symbology == ZBarcodeTypeEAN13);
 }
 
+- (BOOL)shouldDisplayText {
+	return (ZBcCompoundBarcodeText == self.barcodeCompound) || (ZBcCompoundTextBarcode == self.barcodeCompound);
+}
+
 - (NSArray *)substringsToShow
 {
-	if ([self useStringSubitems] && self.stringToShowSubitems.count) {
-		return self.stringToShowSubitems;
-	}
-	return nil;
+	const BOOL isVisible = ([self useStringSubitems] && [self shouldDisplayText] && self.stringToShowSubitems.count);
+	return isVisible ? self.stringToShowSubitems : nil;
+}
+
+- (NSString *)displayText {
+	return (self.stringToShow && [self shouldDisplayText]) ? [NSString stringWithUTF8String:self.stringToShow] : nil;
 }
 
 #pragma mark - Smart (lazy) logic
@@ -400,20 +413,16 @@ ZBarcodeErrorCode errorCodeWithSymbology(ZBarcodeType symbology)
 {
 	self.encodingError = ZBarcodeErrorCodeInvalid;
 	[self.stringToShowSubitems removeAllObjects];
+	_stringToShow = NULL;
 	if (_cgPath) {
 		CGPathRelease(_cgPath);
 		_cgPath = NULL;
 	}
-	//	not sure we need to cleanup these
-//	bzero(_encodedBuffer, sizeof(_encodedBuffer));
-//	for (size_t i=0; i< sizeof(_encodedSubstrings); ++i) {
-//		_encodedSubstrings[i] = 0;
-//	}
 }
 
 - (CGPathRef)CGPath {
 	if (!_cgPath) {
-		self.encodingError = [self encode];
+		[self encodeIfNeeded];
 		if (ZBarcodeErrorCodeOK == self.encodingError) {
 			CGRect resultRect = CGRectMake(0, 0, 0, 1);
 			NSString* resultText = nil;

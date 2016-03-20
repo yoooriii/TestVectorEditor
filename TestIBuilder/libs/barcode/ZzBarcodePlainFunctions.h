@@ -191,9 +191,9 @@ typedef enum ZBarcodeErrorCode : NSInteger {
     ZBarcodeErrorCodeCanNotConvertToUPCE,
 	ZBarcodeErrorCodeExceedQRCodeLimit,
 	ZBarcodeErrorCodeExceedPDF417Limit,
-	ZBarcodeErrorCodeCOUNT,
+	ZBarcodeErrorCodeCOUNT,			//	count, for validation use only
 	ZBarcodeErrorCodeUndefined=-1,	//<-- this should never happen
-	ZBarcodeErrorCodeInvalid=-2		//<-- marked as invalid, is not encoded
+	ZBarcodeErrorCodeInvalid=-2		//<-- marked as invalid, barcode was not encoded yet (if was then either OK or any other error code)
 } ZBarcodeErrorCode;
 
 extern NSInteger BarcodeLastErrorCode;

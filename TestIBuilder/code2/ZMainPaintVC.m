@@ -74,10 +74,9 @@ static const CGSize CanvasSize = {800, 800};
 	barcodeModel.symbology = ZBarcodeTypeUPCA;
 	barcodeModel.barcodeCompound = ZBcCompoundBarcodeText;
 	barcodeModel.font = [UIFont systemFontOfSize:12];
-	barcodeModel.foregroundColor = [UIColor blackColor];
-	barcodeModel.backgroundColor = [UIColor whiteColor];
+	barcodeModel.foregroundColor = [UIColor blueColor];
+	barcodeModel.backgroundColor = [UIColor yellowColor];
 	barcodeModel.horizontalAlignment = ZHorizontalAlignmentCenter;
-	barcodeModel.verticalAlignment = ZVerticalAlignmentMiddle;
 	barcodeModel.text = @"9876543210";
 
 	ZBasicObjectView * view1 = [[ZBasicObjectView alloc] initWithFrame:CGRectMake(10, 10, 100, 150)];
@@ -85,7 +84,6 @@ static const CGSize CanvasSize = {800, 800};
 	[self.canvasView addObject:view1];
 	
 	ZzBarcode1DView * view2 = [[ZzBarcode1DView alloc] initWithFrame:CGRectMake(500, 10, 100, 150)];
-	view2.backgroundColor = [UIColor cyanColor];
 	view2.barcodeModel = barcodeModel;
 	[self.canvasView addObject:view2];
 	

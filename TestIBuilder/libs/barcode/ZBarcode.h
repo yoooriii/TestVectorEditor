@@ -26,6 +26,8 @@ typedef NS_ENUM(NSUInteger, ZVerticalAlignment) {
 	ZVerticalAlignmentBottom
 };
 
+@class ZBarTextItem;
+
 
 @interface ZBarcode : NSObject
 
@@ -39,7 +41,7 @@ typedef NS_ENUM(NSUInteger, ZVerticalAlignment) {
 @property (nonatomic, assign) BOOL bold, italic, underline;//??
 
 @property (nonatomic, assign) ZHorizontalAlignment		horizontalAlignment;
-@property (nonatomic, assign) ZVerticalAlignment		verticalAlignment;
+//@property (nonatomic, assign) ZVerticalAlignment		verticalAlignment;
 
 @property (nonatomic, assign) ZBarcodeErrorCode encodingError;
 @property (nonatomic, assign) ZBarcodeSize	barcodeSize;
@@ -50,9 +52,13 @@ typedef NS_ENUM(NSUInteger, ZVerticalAlignment) {
 - (char*)encodedBuffer;
 - (const char**)encodedSubstrings;
 - (CGPathRef)CGPath;
+//	text + encoder may add a checksum
 @property (nonatomic, assign) const char *stringToShow;
-
-
-- (NSArray *)substringsToShow;
+//	text + encoder may add a checksum && if text enabled (shouldDisplayText == YES)
+@property (nonatomic, readonly) NSString *displayText;
+//	an alias for ZBcCompoundBarcodeText and ZBcCompoundTextBarcode
+- (BOOL)shouldDisplayText;
+//	display string divided into parts (only if text visible)
+- (NSArray<ZBarTextItem*>*)substringsToShow;
 
 @end
