@@ -31,14 +31,6 @@
 		_barcodeLayer.lineJoin = kCALineJoinMiter;
 		_barcodeLayer.lineCap = kCALineCapButt;
 		_barcodeLayer.backgroundColor = NULL;
-
-		if (1) {
-			CGMutablePathRef path = CGPathCreateMutable();
-			for (CGFloat x=0; x<100; x+=6) {
-				CGPathAddRect(path, NULL, CGRectMake(x, 0, 3, 1));
-			}
-			_barcodeLayer.path = path;
-		}
 	}
 	
 	return self;
@@ -46,9 +38,8 @@
 
 - (void)layoutSublayersOfLayer:(CALayer*)layer
 {
-	if (self.layer == layer) {
-		
-
+	if (self.layer == layer)
+	{
 		CGPathRef path = self.barcodeLayer.path;
 		if (!path) {
 			return;
@@ -57,9 +48,8 @@
 		const CGRect bounds = layer.bounds;
 		const CGFloat itemWidth = self.barcodeModel.barItemWidth;
 		
-		CGAffineTransform ttt2 = CGAffineTransformMakeScale(itemWidth, bounds.size.height);
-		self.barcodeLayer.affineTransform = ttt2;
-
+		//TODO: add: horizontal alignment; text area;
+		self.barcodeLayer.affineTransform = CGAffineTransformMakeScale(itemWidth, bounds.size.height);
 		self.barcodeLayer.frame = CGRectMake(0, 0, barcodeRect.size.width*itemWidth, 1);
 	}
 }
@@ -68,12 +58,18 @@
 {
 	if (_barcodeModel != barcodeModel) {
 		_barcodeModel = barcodeModel;
-		self.barcodeLayer.path = barcodeModel.CGPath;
-		self.backgroundColor = barcodeModel.backgroundColor;
-		self.barcodeLayer.fillColor = barcodeModel.foregroundColor.CGColor;
-		[self setNeedsLayout];
+		if (barcodeModel) {
+			self.barcodeLayer.hidden = NO;
+			self.barcodeLayer.path = barcodeModel.CGPath;
+			self.backgroundColor = barcodeModel.backgroundColor;
+			self.barcodeLayer.fillColor = barcodeModel.foregroundColor.CGColor;
+			[self setNeedsLayout];
+		}
+		else {
+			self.barcodeLayer.hidden = YES;
+			self.barcodeLayer.path = NULL;
+		}
 	}
 }
-
 
 @end
