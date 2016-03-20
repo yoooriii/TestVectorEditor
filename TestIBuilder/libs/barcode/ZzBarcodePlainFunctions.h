@@ -89,7 +89,6 @@ BOOL isValidChar_ITF14 (const char sym);
 BOOL isValidString_ITF14 (const char *string);
 const char *barcode_encode_as_bitmap_ITF14(const char *str, const char **formatted_barcode_string);
 
-#ifndef CONSOLE_APP
 //	helper functions to calculate the barcode's size
 CGFloat width_barcode_v1 (const char *bitmap_buffer,
 						const CGFloat iwidth,
@@ -101,6 +100,8 @@ CGFloat width_barcode (const char *bitmap_buffer,
 CGFloat width_barcode_for_symbology (const char *bitmap_buffer,
 									 ZBarcodeType barcodeType,
 									 const CGFloat iwidth);
+#ifndef CONSOLE_APP
+
 //	PDF417
 //	QRcode
 
@@ -191,10 +192,14 @@ typedef enum ZBarcodeErrorCode : NSInteger {
 	ZBarcodeErrorCodeExceedQRCodeLimit,
 	ZBarcodeErrorCodeExceedPDF417Limit,
 	ZBarcodeErrorCodeCOUNT,
-	ZBarcodeErrorCodeUndefined=-1	//<-- this should never happen
+	ZBarcodeErrorCodeUndefined=-1,	//<-- this should never happen
+	ZBarcodeErrorCodeInvalid=-2		//<-- marked as invalid, is not encoded
 } ZBarcodeErrorCode;
 
 extern NSInteger BarcodeLastErrorCode;
+
+const short * barcode_pattern_bar_UPC(const ZBarcodeType symbology);
+const short * barcode_pattern_str_UPC(const ZBarcodeType symbology);
 
 ZBarcodeErrorCode getLastErrorCode (void);
 

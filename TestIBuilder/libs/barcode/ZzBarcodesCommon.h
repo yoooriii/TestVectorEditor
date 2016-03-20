@@ -5,8 +5,6 @@ typedef struct _BarRange_ {
 	float	length;
 } BarRange;
 
-#define FREE_SAFELY(x) { if(x){ free(x); x = NULL; } }
-
 typedef NS_ENUM (NSInteger, ZBarcodeType)
 {
 	ZBarcodeTypeUndefined = -1,

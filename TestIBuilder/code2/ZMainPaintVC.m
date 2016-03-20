@@ -11,15 +11,19 @@
 #import "ZGlassView.h"
 #import "ZKeepResizeContentView.h"
 #import "ZBasicObjectView.h"
-#import "ZGestureHandlerView.h"
+#import "ZzUserInteractionControlView.h"
+//
+#import "ZzBarcodeView.h"
+#import "ZBarcode.h"
+#import "ZzBarcodeDrawView.h"
 
-@interface ZMainPaintVC () <UIScrollViewDelegate, ZGestureHandlerViewDelegate>
+@interface ZMainPaintVC () <UIScrollViewDelegate, ZzUserInteractionControlViewDelegate>
 @property (nonatomic) UIScrollView * scrollView;
 @property (nonatomic) ZCanvasView * canvasView;
-@property (nonatomic) ZGestureHandlerView * controlView;
+@property (nonatomic) ZzUserInteractionControlView * controlView;
 
 @property (nonatomic) UITapGestureRecognizer * tapRecognizer;
-@property (nonatomic) UIPanGestureRecognizer * moveRecognizer;
+//@property (nonatomic) UIPanGestureRecognizer * moveRecognizer;
 @end
 
 static const CGSize CanvasSize = {800, 800};
@@ -38,7 +42,7 @@ static const CGSize CanvasSize = {800, 800};
 	_canvasView = [[ZCanvasView alloc] initWithFrame:CGRectMake(0, 0, CanvasSize.width, CanvasSize.height)];
 	[self.scrollView addSubview:self.canvasView];
 	
-	_controlView = [ZGestureHandlerView new];
+	_controlView = [ZzUserInteractionControlView new];
 	self.controlView.delegate = self;
 	self.controlView.translatesAutoresizingMaskIntoConstraints = NO;
 	self.controlView.backgroundColor = [UIColor clearColor];
@@ -59,11 +63,22 @@ static const CGSize CanvasSize = {800, 800};
 	_tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapRecognizer:)];
 	[self.scrollView addGestureRecognizer:self.tapRecognizer];
 	
-	_moveRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(didMoveRecognizer:)];
-	[self.view addGestureRecognizer:self.moveRecognizer];
+//	_moveRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(didMoveRecognizer:)];
+//	[self.view addGestureRecognizer:self.moveRecognizer];
+	
 }
 
 - (void)loadCanvas {
+	ZBarcode* barcodeModel = [ZBarcode new];
+	barcodeModel.symbology = ZBarcodeTypeUPCA;
+	barcodeModel.barcodeCompound = ZBcCompoundBarcodeText;
+	barcodeModel.font = [UIFont systemFontOfSize:12];
+	barcodeModel.foregroundColor = [UIColor blackColor];
+	barcodeModel.backgroundColor = [UIColor whiteColor];
+	barcodeModel.horizontalAlignment = ZHorizontalAlignmentCenter;
+	barcodeModel.verticalAlignment = ZVerticalAlignmentMiddle;
+	barcodeModel.text = @"9876543210";
+
 	ZBasicObjectView * view1 = [[ZBasicObjectView alloc] initWithFrame:CGRectMake(10, 10, 100, 150)];
 	view1.backgroundColor = [UIColor magentaColor];
 	[self.canvasView addObject:view1];
@@ -72,11 +87,13 @@ static const CGSize CanvasSize = {800, 800};
 	view2.backgroundColor = [UIColor cyanColor];
 	[self.canvasView addObject:view2];
 	
-	ZBasicObjectView * view3 = [[ZBasicObjectView alloc] initWithFrame:CGRectMake(10, 500, 100, 150)];
+	ZzBarcodeDrawView * view3 = [[ZzBarcodeDrawView alloc] initWithFrame:CGRectMake(10, 500, 100, 150)];
+	view3.barcodeModel = barcodeModel;
 	view3.backgroundColor = [UIColor brownColor];
 	[self.canvasView addObject:view3];
 	
-	ZBasicObjectView * view4 = [[ZBasicObjectView alloc] initWithFrame:CGRectMake(600, 600, 100, 150)];
+	ZzBarcodeView * view4 = [[ZzBarcodeView alloc] initWithFrame:CGRectMake(600, 600, 100, 150)];
+	view4.barcodeModel = barcodeModel;
 	view4.backgroundColor = [UIColor orangeColor];
 	[self.canvasView addObject:view4];
 }
@@ -107,10 +124,10 @@ static const CGSize CanvasSize = {800, 800};
 	}
 }
 
-- (void)didMoveRecognizer:(UITapGestureRecognizer*)recognizer
-{
-	
-}
+//- (void)didMoveRecognizer:(UITapGestureRecognizer*)recognizer
+//{
+//	NSLog(@"%s: %@", __PRETTY_FUNCTION__, recognizer);
+//}
 
 #pragma mark - UIScrollViewDelegate
 
@@ -127,18 +144,18 @@ static const CGSize CanvasSize = {800, 800};
 	}
 }
 
-#pragma mark - ZGestureHandlerViewDelegate
+#pragma mark - ZzUserInteractionControlViewDelegate
 
-- (void)gestureHandlerViewBeginsMoving:(ZGestureHandlerView*)view {
+- (void)gestureHandlerViewBeganMoving:(ZzUserInteractionControlView*)view {
 	
 }
 
-- (void)gestureHandlerViewMoved:(ZGestureHandlerView*)view
+- (void)gestureHandlerViewMoved:(ZzUserInteractionControlView*)view
 {
 	self.canvasView.selectedObject.frame = [self.canvasView convertRect:view.selectionRect fromView:view];
 }
 
-- (void)gestureHandlerViewEndsMoving:(ZGestureHandlerView*)view
+- (void)gestureHandlerViewEndsMoving:(ZzUserInteractionControlView*)view
 {
 	self.canvasView.selectedObject.frame = [self.canvasView convertRect:view.selectionRect fromView:view];
 }

@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@class ZGestureHandlerView;
+@class ZzUserInteractionControlView;
 
 @interface ZGestureHandlerVC : UIViewController
 
-@property (nonatomic, readonly) ZGestureHandlerView * gestureHandlerView;
+@property (nonatomic, readonly) ZzUserInteractionControlView * gestureHandlerView;
 - (void)handleScrollRecognizers:(NSArray<UIGestureRecognizer*>*)scrollRecognizers;
 
 @end

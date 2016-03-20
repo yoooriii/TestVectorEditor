@@ -7,7 +7,7 @@
 //
 
 #import "ZGestureHandlerVC.h"
-#import "ZGestureHandlerView.h"
+#import "ZzUserInteractionControlView.h"
 
 @interface ZGestureHandlerVC () <UIGestureRecognizerDelegate>
 
@@ -20,7 +20,7 @@
 
 - (void)loadView
 {
-	_gestureHandlerView = [ZGestureHandlerView new];
+	_gestureHandlerView = [ZzUserInteractionControlView new];
 	self.view = _gestureHandlerView;
 	
 }

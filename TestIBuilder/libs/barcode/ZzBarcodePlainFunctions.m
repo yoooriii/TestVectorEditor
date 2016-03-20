@@ -1,5 +1,5 @@
 #import "ZzBarcodePlainFunctions.h"
-//#import "NSString+addition.h"
+#import "NSString+additions.h"
 
 //	common use functions
 //	returns the result string (out buffer) length
@@ -2807,6 +2807,41 @@ const char *barcode_encode_as_bitmap_ITF14 (const char *str, const char **format
 	return barcode_encode_as_bitmap_I25(char_buffer);
 }
 
+#pragma mark - Barcode string pattern
+
+const short * barcode_pattern_bar_UPC(const ZBarcodeType symbology)
+{
+	static const short pattern_UPCE[] = {1,6,1,-1};
+	static const short pattern_UPCA[] = {1,6,1,6,1,-1};
+	static const short pattern_EAN8[] = {1,4,1,4,1,-1};
+	static const short pattern_EAN13[] = {1,6,1,6,1,-1};
+	
+	switch (symbology) {
+		case ZBarcodeTypeUPCE:	return pattern_UPCE;
+		case ZBarcodeTypeUPCA:	return pattern_UPCA;
+		case ZBarcodeTypeEAN8:	return pattern_EAN8;
+		case ZBarcodeTypeEAN13: return pattern_EAN13;
+		default:	break;
+	}
+	return NULL;
+}
+
+const short * barcode_pattern_str_UPC(const ZBarcodeType symbology)
+{
+	static const short pattern_UPCE[] = {1,6,1,-1};
+	static const short pattern_UPCA[] = {1,5,5,1,-1};
+	static const short pattern_EAN8[] = {0,4,4,0,-1};
+	static const short pattern_EAN13[] = {1,6,6,0,-1};
+	
+	switch (symbology) {
+		case ZBarcodeTypeUPCE:	return pattern_UPCE;
+		case ZBarcodeTypeUPCA:	return pattern_UPCA;
+		case ZBarcodeTypeEAN8:	return pattern_EAN8;
+		case ZBarcodeTypeEAN13: return pattern_EAN13;
+		default:	break;
+	}
+	return NULL;
+}
 
 #pragma mark - hardcode - end
 

@@ -9,7 +9,7 @@
 #import "ZEditorViewController.h"
 #import "ZBasicObjectView.h"
 #import "ZCanvasView.h"
-#import "ZGestureHandlerView.h"
+#import "ZzUserInteractionControlView.h"
 #import "ZScrollView.h"
 
 @interface ZEditorViewController () <UIScrollViewDelegate>
@@ -132,24 +132,24 @@ const CGSize CanvasSize = {800, 800};
     NSLog(@"111");
 }
 
-#pragma mark - ZGestureHandlerViewDelegate
+#pragma mark - ZzUserInteractionControlViewDelegate
 
-- (void)gestureHandlerViewBeginsMoving:(ZGestureHandlerView*)view
+- (void)gestureHandlerViewBeganMoving:(ZzUserInteractionControlView*)view
 {
 
 }
 
-- (void)gestureHandlerViewMoved:(ZGestureHandlerView*)view
-{
-	self.canvasView.selectedObject.frame = [self.canvasView convertRect:view.selectionRect fromView:view];
-}
-
-- (void)gestureHandlerViewEndsMoving:(ZGestureHandlerView*)view
+- (void)gestureHandlerViewMoved:(ZzUserInteractionControlView*)view
 {
 	self.canvasView.selectedObject.frame = [self.canvasView convertRect:view.selectionRect fromView:view];
 }
 
-- (void)gestureHandlerViewDidTap:(ZGestureHandlerView*)view point:(CGPoint)point
+- (void)gestureHandlerViewEndsMoving:(ZzUserInteractionControlView*)view
+{
+	self.canvasView.selectedObject.frame = [self.canvasView convertRect:view.selectionRect fromView:view];
+}
+
+- (void)gestureHandlerViewDidTap:(ZzUserInteractionControlView*)view point:(CGPoint)point
 {
 	ZBasicObjectView * tapObject = nil;
 	const CGPoint canvasPoint = [self.canvasView convertPoint:point fromView:view];

@@ -17,4 +17,6 @@
 #	define  LLog(...)
 #endif
 
+#define FREE_SAFELY(x) { if(x){ free(x); x = NULL; } }
+
 #endif /* prefix_h */

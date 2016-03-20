@@ -29,27 +29,30 @@ typedef NS_ENUM(NSUInteger, ZVerticalAlignment) {
 
 @interface ZBarcode : NSObject
 
-@property (nonatomic, assign) ZBarcodeType	barcodeType;
+@property (nonatomic, assign) ZBarcodeType	symbology;	//	former barcodeType
 @property (nonatomic, assign) ZBcCompound barcodeCompound;
 @property (nonatomic, strong) UIFont *font;
 @property (nonatomic, copy) NSString * text;
-@property (nonatomic, strong) UIColor * textColor;
+@property (nonatomic, strong) UIColor * backgroundColor;
+@property (nonatomic, strong) UIColor * foregroundColor;
 
-@property (nonatomic, assign) BOOL bold, italic, underline;
+@property (nonatomic, assign) BOOL bold, italic, underline;//??
 
 @property (nonatomic, assign) ZHorizontalAlignment		horizontalAlignment;
 @property (nonatomic, assign) ZVerticalAlignment		verticalAlignment;
 
+@property (nonatomic, assign) ZBarcodeErrorCode encodingError;
+@property (nonatomic, assign) ZBarcodeSize	barcodeSize;
+@property (nonatomic, readonly) CGFloat minimalWidth;
+@property (nonatomic, readonly) CGFloat minimalHeight;
+
 - (CGFloat)barItemWidth;
-- (CGFloat)minimalWidth;
-- (CGFloat)minimalHeight;
 - (char*)encodedBuffer;
 - (const char**)encodedSubstrings;
 - (CGPathRef)CGPath;
 @property (nonatomic, assign) const char *stringToShow;
 
-@property (nonatomic, assign) ZBarcodeErrorCode encodingError;
 
-@property (nonatomic, assign) ZBarcodeSize	barcodeSize;
+- (NSArray *)substringsToShow;
 
 @end

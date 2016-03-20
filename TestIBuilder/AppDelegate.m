@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import "ZGestureHandlerVC.h"
 #import "ZEditorViewController.h"
-#import "ZGestureHandlerView.h"
+#import "ZzUserInteractionControlView.h"
 
 #import "ZMainPaintVC.h"
 

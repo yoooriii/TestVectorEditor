@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ZGestureHandlerViewDelegate.h"
+#import "ZzUserInteractionControlViewDelegate.h"
 
-@class ZGestureHandlerView;
+@class ZzUserInteractionControlView;
 
-@interface ZEditorViewController : UIViewController <ZGestureHandlerViewDelegate>
+@interface ZEditorViewController : UIViewController <ZzUserInteractionControlViewDelegate>
 @property (nonatomic, readonly) UIScrollView * scrollView;
-@property (nonatomic, weak) ZGestureHandlerView	* gestureHandlerView;
+@property (nonatomic, weak) ZzUserInteractionControlView	* gestureHandlerView;
 @end

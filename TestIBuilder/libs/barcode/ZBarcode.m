@@ -7,39 +7,92 @@
 //
 
 #import "ZBarcode.h"
+#import "ZBarTextItem.h"
+
+ZBarcodeErrorCode errorCodeWithSymbology(ZBarcodeType symbology)
+{
+	switch (symbology) {
+		case ZBarcodeType39:		return ZBarcodeErrorCodeUpperAbcDigitsOnly;
+		case ZBarcodeType39_43:		return ZBarcodeErrorCodeUpperAbcDigitsOnly;
+		case ZBarcodeTypeI25:		return ZBarcodeErrorCodeDigitsOnly;
+		case ZBarcodeTypeC128A:		return ZBarcodeErrorCodeAbcDigitsOnly;
+		case ZBarcodeTypeC128B:		return ZBarcodeErrorCodeAbcDigitsOnly;
+		case ZBarcodeTypeC128C:		return ZBarcodeErrorCodeDigitsOnly;
+		case ZBarcodeTypeC128auto:	return ZBarcodeErrorCodeAbcDigitsOnly;
+		case ZBarcodeTypeEAN8:		return ZBarcodeErrorCodeDigitsOnly;
+		case ZBarcodeTypeEAN13:		return ZBarcodeErrorCodeDigitsOnly;
+		case ZBarcodeTypeUPCA:		return ZBarcodeErrorCodeDigitsOnly;
+		case ZBarcodeTypeUPCE:		return ZBarcodeErrorCodeDigitsOnly;
+		case ZBarcodeTypeCodabar:	return ZBarcodeErrorCodeDigitsSelectSymbolsOnly;
+		case ZBarcodeTypeITF14:		return ZBarcodeErrorCodeDigitsOnly;
+		default:					break;
+	}
+	
+	return ZBarcodeErrorCodeUndefined;
+}
+
+@interface NSString (ZTmp_Refactorit)
+
+@end
+
+@implementation NSString (ZTmp_Refactorit)
+
+- (CGSize)prefferedSizeWithFont:(UIFont *)font actualFontSize:(CGFloat *)actualFontSize forWidth:(const CGFloat)width
+{
+	return [self sizeWithFont:font minFontSize:1 actualFontSize:actualFontSize forWidth:width lineBreakMode:NSLineBreakByCharWrapping];
+}
+
+@end
+
+#pragma mark -
+
+@interface ZBarcode ()
+
+@property (nonatomic, readonly) NSMutableArray	*stringToShowSubitems;
+
+@end
 
 @implementation ZBarcode
 {
 	char					_encodedBuffer[1024];
 	const char				*_encodedSubstrings[256];
 	CGPathRef				_cgPath;
-	CGFloat _minimalWidth;
-	CGFloat _minimalHeight;
+}
 
+- (void)dealloc
+{
+	if (_cgPath) {
+		CGPathRelease(_cgPath);
+		_cgPath = NULL;
+	}
+}
+
+- (id)init
+{
+	if ((self = [super init]))
+	{
+		_encodingError = ZBarcodeErrorCodeInvalid;
+		_stringToShowSubitems = [NSMutableArray arrayWithCapacity:4];
+		self.font = [UIFont fontWithName:@"Arial" size:10];
+		_symbology = ZBarcodeType39;
+		_barcodeSize = ZBarcodeSizeSmall;
+		self.backgroundColor = [UIColor clearColor];
+		self.foregroundColor = [UIColor blackColor];
+		self.barcodeCompound = ZBcCompoundBarcodeText;
+	}
+	return self;
 }
 
 - (CGFloat)barItemWidth
 {
-	if (ZBarcodeTypeQRCode == self.barcodeType) {
-		//Leonid: Im not sure about this
-		return [[self class] barItemWidthWithBarcodeSize:ZBarcodeSizeSmall];
-	}
 	return [[self class] barItemWidthWithBarcodeSize:self.barcodeSize];
 }
 
-const CGFloat WidthDecoder[] = {3,5,8};
-
 + (CGFloat)barItemWidthWithBarcodeSize:(ZBarcodeSize)bcSize
 {
+	const CGFloat WidthDecoder[] = {3,5,8};
+	bcSize = MIN(MAX(bcSize, 0), 2); // 0<=sz<=2
 	return WidthDecoder[bcSize] * 72.0 / 300.0;
-}
-
-- (CGFloat)minimalWidth {
-	return 100;
-}
-
-- (CGFloat)minimalHeight {
-	return 100;
 }
 
 - (char *)encodedBuffer {
@@ -50,15 +103,12 @@ const CGFloat WidthDecoder[] = {3,5,8};
 	return _encodedSubstrings;
 }
 
-- (CGPathRef)CGPath {
-	return _cgPath;
-}
 
 #pragma mark - encoding
 
-- (void)encode
+- (ZBarcodeErrorCode)encode
 {
-	_encodingError = ZBarcodeErrorCodeOK;
+	ZBarcodeErrorCode success = ZBarcodeErrorCodeOK;
 	NSString *barcodeText = self.text;
 	const char *buffer = NULL;
 	const char **bufferSubstrings = NULL;
@@ -66,14 +116,13 @@ const CGFloat WidthDecoder[] = {3,5,8};
 	
 	if (0 == [barcodeText length])
 	{
-		self.encodingError = ZBarcodeErrorCodeEmptyString;
-		return;
+		return ZBarcodeErrorCodeEmptyString;
 	}
 	
-//	if (self.barcodeType == ZBarcodeTypeQRCode) {
+//	if (self.symbology == ZBarcodeTypeQRCode) {
 //		[self encodeQR];
 //	}
-//	else if (self.barcodeType == ZBarcodeTypePDF417) {
+//	else if (self.symbology == ZBarcodeTypePDF417) {
 //		[self encodePDF417];
 //	}
 //	else
@@ -82,12 +131,12 @@ const CGFloat WidthDecoder[] = {3,5,8};
 		const char *barcodeCString = [barcodeText cStringUsingEncoding:encoding];
 		const size_t text_length = [barcodeText lengthOfBytesUsingEncoding:encoding];
 		
-		switch (self.barcodeType)
+		switch (self.symbology)
 		{
 			case ZBarcodeType39:
 			case ZBarcodeType39_43:
 			{
-				const BOOL mod43 = (self.barcodeType == ZBarcodeType39_43);
+				const BOOL mod43 = (self.symbology == ZBarcodeType39_43);
 				buffer = barcode_encode_as_bitmap_39(barcodeCString, mod43, &_stringToShow);
 				break;
 			}
@@ -165,42 +214,244 @@ const CGFloat WidthDecoder[] = {3,5,8};
 		else {
 			_encodedSubstrings[0] = NULL;
 		}
-		_encodingError = getLastErrorCode();
+		success = getLastErrorCode();
 	}
 	else
 	{
-		static NSDictionary *sPIValidationErrorsMap = nil;
-		static dispatch_once_t onceToken;
-		dispatch_once(&onceToken, ^{
-			sPIValidationErrorsMap = @{@(ZBarcodeType39) : @(ZBarcodeErrorCodeUpperAbcDigitsOnly),
-									   @(ZBarcodeType39_43) : @(ZBarcodeErrorCodeUpperAbcDigitsOnly),
-									   @(ZBarcodeTypeI25) : @(ZBarcodeErrorCodeDigitsOnly),
-									   @(ZBarcodeTypeC128A) : @(ZBarcodeErrorCodeAbcDigitsOnly),
-									   @(ZBarcodeTypeC128B) : @(ZBarcodeErrorCodeAbcDigitsOnly),
-									   @(ZBarcodeTypeC128C) : @(ZBarcodeErrorCodeDigitsOnly),
-									   @(ZBarcodeTypeC128auto) : @(ZBarcodeErrorCodeAbcDigitsOnly),
-									   @(ZBarcodeTypeEAN8) : @(ZBarcodeErrorCodeDigitsOnly),
-									   @(ZBarcodeTypeEAN13) : @(ZBarcodeErrorCodeDigitsOnly),
-									   @(ZBarcodeTypeUPCA) : @(ZBarcodeErrorCodeDigitsOnly),
-									   @(ZBarcodeTypeUPCE) : @(ZBarcodeErrorCodeDigitsOnly),
-									   @(ZBarcodeTypeCodabar) : @(ZBarcodeErrorCodeDigitsSelectSymbolsOnly),
-									   @(ZBarcodeTypeITF14) : @(ZBarcodeErrorCodeDigitsOnly)};
-		});
-		NSNumber *errorNumber = sPIValidationErrorsMap[@(self.barcodeType)];
-		if (errorNumber)
-		{
-			_encodingError = [errorNumber unsignedIntegerValue];
-		}
-		else {
-			_encodingError = ZBarcodeErrorCodeUndefined;	//<-- should never happen
-		}
+		success = errorCodeWithSymbology(self.symbology);
 	}
-	[self calculateOptimalWidth];
+	
+	if (ZBarcodeErrorCodeOK == success) {
+		[self calculateOptimalWidth];
+	}
+	else {
+		//TODO: set proper min size
+		_minimalWidth = 50;
+		_minimalHeight = 0;
+	}
+	
+	return success;
 }
 
 - (void)calculateOptimalWidth
 {
-	_minimalWidth = 100;
-	_minimalHeight = 100;
+	if (self.encodingError != ZBarcodeErrorCodeOK) {
+		return;
+	}
+	
+	const CGFloat baritemWidth = [self barItemWidth];
+	
+	if (ZBarcodeTypePDF417 != self.symbology) {
+		_minimalHeight = 0;
+	}
+	
+	const short * pattern_of_string = barcode_pattern_str_UPC(self.symbology);
+	const short * pattern_of_barcode = barcode_pattern_bar_UPC(self.symbology);
+
+	if (pattern_of_string && pattern_of_barcode)
+	{
+		if (_stringToShow)
+		{
+			NSUInteger location = 0;
+			for (size_t i=0; pattern_of_string[i] >= 0; ++i) {
+				const int length = pattern_of_string[i];
+				ZBarTextItem *btItem = [ZBarTextItem barTextItemWithCString:_stringToShow range:NSMakeRange(location, length)];
+				[self.stringToShowSubitems addObject:btItem];
+				location += length;
+			}
+		}
+		size_t bar_whole_length = 0;
+		size_t i_offset = 0;
+		for (size_t i=0; pattern_of_barcode[i] >= 0; ++i) {
+			const short items_number = pattern_of_barcode[i];
+			size_t item_length = 0;
+			for (size_t j=0; j < items_number; ++j) {
+				item_length += substring_item_length(_encodedSubstrings[i_offset+j]);
+			}
+			bar_whole_length += item_length;
+			i_offset += items_number;
+		}
+		
+		const CGFloat barcodeWidth = bar_whole_length * baritemWidth;
+		BOOL includeText = self.barcodeCompound != ZBcCompoundBarcodeOnly;
+		if (includeText)
+		{
+			//	divide barcode area into parts
+			NSMutableArray *allBarAreaLengths = [NSMutableArray arrayWithCapacity:8];
+			size_t i_offset = 0;
+			for (size_t i=0; pattern_of_barcode[i] >= 0; ++i) {
+				const short items_number = pattern_of_barcode[i];
+				size_t item_length = 0;
+				for (size_t j=0; j < items_number; ++j) {
+					item_length += substring_item_length(_encodedSubstrings[i_offset+j]);
+				}
+				[allBarAreaLengths addObject:@(item_length)];
+				i_offset += items_number;
+			}
+			
+			const CGFloat baritemWidth = [self barItemWidth];
+			//	find suitable font (adjust font size)
+			UIFont *font = self.font;
+			ZBarTextItem *aSubitem = self.stringToShowSubitems[1];
+			CGFloat actualFontSize;
+			NSString *aSubstring = aSubitem.string;
+			const CGFloat substringWidth = (CGFloat)[allBarAreaLengths[1] integerValue] * baritemWidth;
+			[aSubstring prefferedSizeWithFont:font actualFontSize:&actualFontSize forWidth:substringWidth];
+			if (actualFontSize < font.pointSize) {
+				font = [font fontWithSize:actualFontSize];
+			}
+			if (self.stringToShowSubitems.count == 4) {
+				aSubitem = self.stringToShowSubitems[2];
+				aSubstring = aSubitem.string;
+				const CGFloat substringWidth = (CGFloat)[allBarAreaLengths[1] integerValue] * baritemWidth;
+				[aSubstring prefferedSizeWithFont:font actualFontSize:&actualFontSize forWidth:substringWidth];
+				if (actualFontSize < font.pointSize) {
+					font = [font fontWithSize:actualFontSize];
+				}
+			}
+			
+			for (ZBarTextItem *anItem in self.stringToShowSubitems) {
+				[anItem updateSizeWithFont:font];
+			}
+		}
+		_minimalWidth = barcodeWidth;
+		const NSUInteger ssCount = [self.stringToShowSubitems count];
+		if (includeText && ssCount) {
+			_minimalWidth += [self.stringToShowSubitems.firstObject stringSize].width;
+			_minimalWidth += [self.stringToShowSubitems.lastObject stringSize].width;
+		}
+	}
+	else
+	{
+		switch (self.symbology)
+		{
+				//		case ZBarcodeTypeQRCode:
+				//			_minimalWidth = self.encodedQRCodeMatrix.width;
+				//			return;
+				//
+				//		case ZBarcodeTypePDF417: {
+				//			//	it calculates height as well;
+				//			_minimalWidth = self.encoderPDF417.width;
+				//			_minimalHeight = self.encoderPDF417.height * 4.0f;//ratio x:y = 1:4
+				//			return;
+				//		}
+				
+			case ZBarcodeType39:
+			case ZBarcodeType39_43:
+			case ZBarcodeTypeI25:
+			case ZBarcodeTypeCodabar:
+				_minimalWidth = width_barcode_v1(_encodedBuffer, baritemWidth, 0);
+				break;
+
+			case ZBarcodeTypeC128A:
+			case ZBarcodeTypeC128B:
+			case ZBarcodeTypeC128C:
+			case ZBarcodeTypeC128auto:
+				_minimalWidth = width_barcode(_encodedBuffer, baritemWidth, 0);
+				break;
+				
+			case ZBarcodeTypeITF14:
+			{
+				const CGFloat additionalWidth = baritemWidth * 28;
+				_minimalWidth = width_barcode_v1(_encodedBuffer, baritemWidth, 0) + additionalWidth;
+				break;
+			}
+			default:
+				break;
+		}
+	}
+}
+
+- (BOOL)useStringSubitems {
+	return (self.symbology == ZBarcodeTypeUPCA)
+		|| (self.symbology == ZBarcodeTypeUPCE)
+		|| (self.symbology == ZBarcodeTypeEAN8)
+		|| (self.symbology == ZBarcodeTypeEAN13);
+}
+
+- (NSArray *)substringsToShow
+{
+	if ([self useStringSubitems] && self.stringToShowSubitems.count) {
+		return self.stringToShowSubitems;
+	}
+	return nil;
+}
+
+#pragma mark - Smart (lazy) logic
+
+- (void)setText:(NSString *)text
+{
+	//TODO: additional logic: text and text to show is not the same (checksum makes the difference)
+	if (![_text isEqualToString:text]) {
+		_text = [text copy];
+		[self invalidate];
+	}
+}
+
+- (void)setSymbology:(ZBarcodeType)symbology
+{
+	if (_symbology != symbology) {
+		_symbology = symbology;
+		[self invalidate];
+	}
+}
+
+- (void)invalidate
+{
+	self.encodingError = ZBarcodeErrorCodeInvalid;
+	[self.stringToShowSubitems removeAllObjects];
+	if (_cgPath) {
+		CGPathRelease(_cgPath);
+		_cgPath = NULL;
+	}
+	//	not sure we need to cleanup these
+//	bzero(_encodedBuffer, sizeof(_encodedBuffer));
+//	for (size_t i=0; i< sizeof(_encodedSubstrings); ++i) {
+//		_encodedSubstrings[i] = 0;
+//	}
+}
+
+- (CGPathRef)CGPath {
+	if (!_cgPath) {
+		self.encodingError = [self encode];
+		if (ZBarcodeErrorCodeOK == self.encodingError) {
+			CGRect resultRect = CGRectMake(0, 0, 0, 1);
+			NSString* resultText = nil;
+			_cgPath = createPathBarcodeWithTextSymbology(self.text, &resultRect, self.symbology, 1, &resultText);
+		}
+	}
+	return _cgPath;
+}
+#pragma mark - Debug
+
+- (NSString*)symbologyString
+{
+	switch (self.symbology) {
+#define CASE(x, y) case x: return y
+			CASE(ZBarcodeTypeUndefined, @"undefined");
+			CASE(ZBarcodeType39, @"39");
+			CASE(ZBarcodeType39_43, @"39 mod43");
+			CASE(ZBarcodeTypeI25, @"I2of5");
+			CASE(ZBarcodeTypeC128A, @"C128A");
+			CASE(ZBarcodeTypeC128B, @"C128B");
+			CASE(ZBarcodeTypeC128C, @"C128C");
+			CASE(ZBarcodeTypeC128auto, @"C128auto");
+			CASE(ZBarcodeTypeEAN8, @"EAN8");
+			CASE(ZBarcodeTypeEAN13, @"EAN13");
+			CASE(ZBarcodeTypeUPCA, @"UPCA");
+			CASE(ZBarcodeTypeUPCE, @"UPCE");
+			CASE(ZBarcodeTypeCodabar, @"Codabar");
+			CASE(ZBarcodeTypeITF14, @"ITF14");
+			CASE(ZBarcodeTypeQRCode, @"QR");
+			CASE(ZBarcodeTypePDF417, @"PDF417");
+#undef CASE
+	}
+	return @"???";
+}
+
+- (NSString *)description
+{
+	NSString* status = (ZBarcodeErrorCodeOK == self.encodingError) ? @"OK" : [NSString stringWithFormat:@"err:%d", (int)self.encodingError];
+	return [NSString stringWithFormat:@"<%@:%p>%@:'%@'(%@)", [self class], self, [self symbologyString], self.text, status];
 }
 @end

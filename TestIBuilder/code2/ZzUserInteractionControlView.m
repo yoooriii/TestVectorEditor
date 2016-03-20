@@ -1,12 +1,12 @@
 //
-//  ZGestureHandlerView.m
+//  ZzUserInteractionControlView.m
 //  TestIBuilder
 //
 //  Created by leonid lo on 2/29/16.
 //  Copyright © 2016 leonid lo. All rights reserved.
 //
 
-#import "ZGestureHandlerView.h"
+#import "ZzUserInteractionControlView.h"
 #import "ZRulerView.h"
 
 static inline CGPoint CGRectGetMaxXY(CGRect rect) {
@@ -21,13 +21,13 @@ static inline CGPoint CGPointPlusPoint(CGPoint pt1, CGPoint pt2) {
     return CGPointMake(pt1.x + pt2.x, pt1.y + pt2.y);
 }
 
-@class ZGestureHandlerView;
+@class ZzUserInteractionControlView;
 
 @interface ZHandleMoveView : UIView
 @property (nonatomic, strong) UIPanGestureRecognizer * panRecognizer;
 @property (nonatomic, assign) CGPoint hotPoint;
 @property (nonatomic, assign, getter=isSelected) BOOL selected;
-- (ZGestureHandlerView*)parent;
+- (ZzUserInteractionControlView*)parent;
 - (void)_internalInit;
 @end
 
@@ -48,13 +48,14 @@ typedef NS_ENUM(NSUInteger, ZPinKind)
 @end
 
 
-@interface ZGestureHandlerView ()
+@interface ZzUserInteractionControlView ()
 @property (nonatomic, strong) ZPinView *handleView1;
 @property (nonatomic, strong) ZPinView *handleView2;
 @property (nonatomic, strong) ZSelectionView *selectionView;
 @property (nonatomic, assign) BOOL disableNormalization;
 @property (nonatomic, strong) ZRulerView *rulerViewVertical;
 @property (nonatomic, strong) ZRulerView *rulerViewHorizontal;
+@property (nonatomic) UIRotationGestureRecognizer * rotateRecognizer;
 - (void)subviewDidBeginMoving:(UIView*)subview;
 - (void)subviewDidMove:(UIView*)subview;
 - (void)subviewDidEndMoving:(UIView*)subview;
@@ -87,9 +88,9 @@ typedef NS_ENUM(NSUInteger, ZPinKind)
     self.userInteractionEnabled = YES;
 }
 
-- (ZGestureHandlerView *)parent
+- (ZzUserInteractionControlView *)parent
 {
-    return (ZGestureHandlerView*)self.superview;
+    return (ZzUserInteractionControlView*)self.superview;
 }
 
 - (CGPoint)hotPoint
@@ -251,9 +252,10 @@ typedef NS_ENUM(NSUInteger, ZPinKind)
 #pragma mark -
 
 
-@implementation ZGestureHandlerView
+@implementation ZzUserInteractionControlView
 
 @synthesize moving = _isMoving;
+@synthesize resizing = _isResizing;
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -304,6 +306,9 @@ typedef NS_ENUM(NSUInteger, ZPinKind)
 	_selected = YES;
 	self.selected = NO;
 	
+	_rotateRecognizer = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(didRotateRecognizer:)];
+	[self.selectionView addGestureRecognizer:self.rotateRecognizer];
+	
 	if (1) {
 		self.handleView2.pinColor = [UIColor redColor];
 		self.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.1];
@@ -347,14 +352,21 @@ typedef NS_ENUM(NSUInteger, ZPinKind)
     }
 
     _isMoving = YES;
+	_isResizing = (subview == self.handleView1) || (subview == self.handleView2);
+	
+	if (!self.resizing) {
+		[self hideHandlers:YES animated:YES];
+	}
 	
 	typeof(self.delegate) dlg = self.delegate;
-	[dlg gestureHandlerViewBeginsMoving:self];
+	[dlg gestureHandlerViewBeganMoving:self];
 }
 
 - (void)subviewDidEndMoving:(UIView*)subview
 {
     _isMoving = NO;
+	const BOOL didResize = self.resizing;
+	_isResizing = NO;
 
     if (!self.disableNormalization)
     {
@@ -416,6 +428,10 @@ typedef NS_ENUM(NSUInteger, ZPinKind)
             }
         }
     }
+	
+	if (!didResize) {
+		[self hideHandlers:NO animated:YES];
+	}
 
 	typeof(self.delegate) dlg = self.delegate;
 	[dlg gestureHandlerViewEndsMoving:self];
@@ -463,6 +479,22 @@ typedef NS_ENUM(NSUInteger, ZPinKind)
 		self.selectionView.hidden = hidden;
 
     }
+}
+
+- (void)didRotateRecognizer:(UIRotationGestureRecognizer*)recognizer
+{
+	recognizer.view.transform = CGAffineTransformMakeRotation(recognizer.rotation);
+}
+- (void)hideHandlers:(BOOL)hide animated:(BOOL)animated
+{
+	const CGFloat alpha = hide ? 0.5 : 1;
+	if (hide) {
+		animated = NO;
+	}
+	[UIView animateWithDuration:animated ? 0.2 : 0 animations:^{
+		self.handleView1.alpha = alpha;
+		self.handleView2.alpha = alpha;
+	}];
 }
 
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
