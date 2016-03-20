@@ -431,7 +431,7 @@ ZBarcodeErrorCode errorCodeWithSymbology(ZBarcodeType symbology)
 			CASE(ZBarcodeTypeUndefined, @"undefined");
 			CASE(ZBarcodeType39, @"39");
 			CASE(ZBarcodeType39_43, @"39 mod43");
-			CASE(ZBarcodeTypeI25, @"I2of5");
+			CASE(ZBarcodeTypeI25, @"I2-5");
 			CASE(ZBarcodeTypeC128A, @"C128A");
 			CASE(ZBarcodeTypeC128B, @"C128B");
 			CASE(ZBarcodeTypeC128C, @"C128C");

@@ -13,6 +13,7 @@
 		E20352D61C804EB400091789 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E20352D41C804EB400091789 /* Main.storyboard */; };
 		E20352D81C804EB400091789 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E20352D71C804EB400091789 /* Assets.xcassets */; };
 		E20352DB1C804EB400091789 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E20352D91C804EB400091789 /* LaunchScreen.storyboard */; };
+		E24DA6281C9E9A15005FAC6D /* ZzBarcode1DView.m in Sources */ = {isa = PBXBuildFile; fileRef = E24DA6271C9E9A15005FAC6D /* ZzBarcode1DView.m */; };
 		E26311BB1C9CB90000DF11F3 /* ZzBarcodeDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = E26311BA1C9CB90000DF11F3 /* ZzBarcodeDrawView.m */; };
 		E27C984A1C920D1700B2E0D0 /* ZBasicObjectView.m in Sources */ = {isa = PBXBuildFile; fileRef = E27C983C1C920D1700B2E0D0 /* ZBasicObjectView.m */; };
 		E27C984B1C920D1700B2E0D0 /* ZCanvasView.m in Sources */ = {isa = PBXBuildFile; fileRef = E27C983E1C920D1700B2E0D0 /* ZCanvasView.m */; };
@@ -57,6 +58,8 @@
 		E20352D71C804EB400091789 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E20352DA1C804EB400091789 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E20352DC1C804EB400091789 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E24DA6261C9E9A15005FAC6D /* ZzBarcode1DView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZzBarcode1DView.h; sourceTree = "<group>"; };
+		E24DA6271C9E9A15005FAC6D /* ZzBarcode1DView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZzBarcode1DView.m; sourceTree = "<group>"; };
 		E26311B91C9CB90000DF11F3 /* ZzBarcodeDrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZzBarcodeDrawView.h; sourceTree = "<group>"; };
 		E26311BA1C9CB90000DF11F3 /* ZzBarcodeDrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZzBarcodeDrawView.m; sourceTree = "<group>"; };
 		E27C983B1C920D1700B2E0D0 /* ZBasicObjectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBasicObjectView.h; sourceTree = "<group>"; };
@@ -199,6 +202,8 @@
 				E2B278161C9B822E00710000 /* ZzBarcodeLayer.m */,
 				E26311B91C9CB90000DF11F3 /* ZzBarcodeDrawView.h */,
 				E26311BA1C9CB90000DF11F3 /* ZzBarcodeDrawView.m */,
+				E24DA6261C9E9A15005FAC6D /* ZzBarcode1DView.h */,
+				E24DA6271C9E9A15005FAC6D /* ZzBarcode1DView.m */,
 			);
 			path = bc_view;
 			sourceTree = "<group>";
@@ -369,6 +374,7 @@
 				E2BA881D1C961CCB009B2CA0 /* ZzBarcodesCommon.m in Sources */,
 				E27C984F1C920D1700B2E0D0 /* ZGlassView.m in Sources */,
 				E2B278171C9B822E00710000 /* ZzBarcodeLayer.m in Sources */,
+				E24DA6281C9E9A15005FAC6D /* ZzBarcode1DView.m in Sources */,
 				E2B278141C9B81A800710000 /* ZzBarcodeView.m in Sources */,
 				E20352CD1C804EB400091789 /* main.m in Sources */,
 				E27C984A1C920D1700B2E0D0 /* ZBasicObjectView.m in Sources */,

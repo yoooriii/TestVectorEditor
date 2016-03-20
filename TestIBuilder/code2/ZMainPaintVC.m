@@ -16,6 +16,7 @@
 #import "ZzBarcodeView.h"
 #import "ZBarcode.h"
 #import "ZzBarcodeDrawView.h"
+#import "ZzBarcode1DView.h"
 
 @interface ZMainPaintVC () <UIScrollViewDelegate, ZzUserInteractionControlViewDelegate>
 @property (nonatomic) UIScrollView * scrollView;
@@ -83,8 +84,9 @@ static const CGSize CanvasSize = {800, 800};
 	view1.backgroundColor = [UIColor magentaColor];
 	[self.canvasView addObject:view1];
 	
-	ZBasicObjectView * view2 = [[ZBasicObjectView alloc] initWithFrame:CGRectMake(500, 10, 100, 150)];
+	ZzBarcode1DView * view2 = [[ZzBarcode1DView alloc] initWithFrame:CGRectMake(500, 10, 100, 150)];
 	view2.backgroundColor = [UIColor cyanColor];
+	view2.barcodeModel = barcodeModel;
 	[self.canvasView addObject:view2];
 	
 	ZzBarcodeDrawView * view3 = [[ZzBarcodeDrawView alloc] initWithFrame:CGRectMake(10, 500, 100, 150)];
