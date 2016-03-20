@@ -12,6 +12,7 @@
 @interface ZzBarcode1DView ()
 @property (nonatomic, readonly) CAShapeLayer * barcodeLayer;
 @property (nonatomic, readonly) CATextLayer * textLayer;
+@property (nonatomic, strong) UILabel * dbgLabel;
 @end
 
 @implementation ZzBarcode1DView
@@ -30,15 +31,40 @@
 		self.barcodeLayer.lineCap = kCALineCapButt;
 		self.barcodeLayer.lineWidth = 0;
 		
+		if (0) {
+			CGMutablePathRef path = CGPathCreateMutable();
+			for (CGFloat x=0; x<100; x+=6) {
+				CGPathAddRect(path, NULL, CGRectMake(x, 0, 3, 1));
+			}
+			self.barcodeLayer.path = path;
+
+			if (1) {
+				self.barcodeLayer.cornerRadius = 5;
+				self.barcodeLayer.borderColor = [UIColor brownColor].CGColor;
+				self.barcodeLayer.borderWidth = 1;
+			}
+		}
+		
 		_textLayer = [CATextLayer layer];
 		[self.layer addSublayer:self.textLayer];
 		self.textLayer.anchorPoint = CGPointZero;
 		self.textLayer.font = (__bridge CFTypeRef _Nullable)(@"Courier");
 		self.textLayer.fontSize = 14;
 		self.textLayer.alignmentMode = kCAAlignmentCenter;
-		self.textLayer.truncationMode = kCATruncationNone;
+		self.textLayer.truncationMode = kCATruncationEnd;
 		self.textLayer.wrapped = NO;
 		self.textLayer.backgroundColor = NULL;
+		self.textLayer.allowsFontSubpixelQuantization = YES;
+		self.textLayer.allowsEdgeAntialiasing = NO;
+		self.textLayer.opaque = NO;
+
+		if (1) {
+			_dbgLabel = [UILabel new];
+			[self addSubview:self.dbgLabel];
+			self.dbgLabel.font = [UIFont fontWithName:@"Courier" size:14];
+			self.dbgLabel.textColor = [UIColor blueColor];
+			self.dbgLabel.backgroundColor = [[UIColor yellowColor] colorWithAlphaComponent:0.5];
+		}
 	}
 	
 	return self;
@@ -46,10 +72,16 @@
 
 - (void)layoutSublayersOfLayer:(CALayer*)layer
 {
+	if (self.dbgLabel) {
+		self.dbgLabel.frame = CGRectMake(0, 0, self.bounds.size.width, 20);
+	}
+
+	
 	if (self.layer == layer)
 	{
 		CGPathRef path = self.barcodeLayer.path;
 		if (!path) {
+			//TODO: fix it for text or error messages
 			return;
 		}
 		const CGRect barcodeRect = CGPathGetPathBoundingBox(path);
@@ -61,11 +93,14 @@
 		const CGFloat bcHeight = MAX((boxHeight - txtHeight), 0);
 		
 		//TODO: add: horizontal alignment; text area;
-		self.barcodeLayer.affineTransform = CGAffineTransformMakeScale(itemWidth, boxHeight);
+		self.barcodeLayer.affineTransform = CGAffineTransformMakeScale(itemWidth, bcHeight);
 		self.barcodeLayer.frame = CGRectMake(0, 0, bcWidth, 1);
+		[self.barcodeLayer removeAllAnimations];
 		
 		if (!self.textLayer.hidden) {
-			self.textLayer.frame = CGRectMake(0, bcHeight, bounds.size.width, txtHeight);
+			self.textLayer.frame = CGRectMake(0, bcHeight, bcWidth, txtHeight);
+			self.textLayer.contentsScale = self.window.screen.scale;
+			[self.textLayer removeAllAnimations];
 		}
 	}
 }
@@ -87,14 +122,13 @@
 		self.barcodeLayer.path = self.barcodeModel.CGPath;
 		self.backgroundColor = backgroundColor;
 		self.barcodeLayer.fillColor = foregroundColor;
+//		self.textLayer.backgroundColor = backgroundColor.CGColor;
 		
 		self.textLayer.foregroundColor = foregroundColor;
 		NSString* text = self.barcodeModel.displayText;
-		if (1) {
-			text = @"Hello Lee!";
-		}
+		self.dbgLabel.text = text;
 		self.textLayer.string = text;
-		self.barcodeLayer.hidden = (0 != text.length);
+		self.barcodeLayer.hidden = (0 == text.length);
 		
 		[self setNeedsLayout];
 	}

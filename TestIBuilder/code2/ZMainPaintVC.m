@@ -160,4 +160,21 @@ static const CGSize CanvasSize = {800, 800};
 	self.canvasView.selectedObject.frame = [self.canvasView convertRect:view.selectionRect fromView:view];
 }
 
+//rotations
+
+- (void)gestureHandlerViewBeganRotating:(ZzUserInteractionControlView*)view
+{
+	
+}
+
+- (void)gestureHandlerViewRotated:(ZzUserInteractionControlView*)view
+{
+	self.canvasView.selectedObject.transform = CGAffineTransformMakeRotation(view.rotationAngle);
+}
+
+- (void)gestureHandlerViewEndsRotating:(ZzUserInteractionControlView*)view
+{
+	
+}
+
 @end

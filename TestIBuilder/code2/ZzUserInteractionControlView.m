@@ -483,8 +483,27 @@ typedef NS_ENUM(NSUInteger, ZPinKind)
 
 - (void)didRotateRecognizer:(UIRotationGestureRecognizer*)recognizer
 {
-	recognizer.view.transform = CGAffineTransformMakeRotation(recognizer.rotation);
+	switch (recognizer.state) {
+  case UIGestureRecognizerStateBegan:
+			[self.delegate gestureHandlerViewBeganRotating:self];
+			break;
+			
+  case UIGestureRecognizerStateChanged:
+			_rotationAngle = recognizer.rotation;
+			recognizer.view.transform = CGAffineTransformMakeRotation(recognizer.rotation);
+			[self.delegate gestureHandlerViewRotated:self];
+			break;
+			
+  case UIGestureRecognizerStateEnded:
+  case UIGestureRecognizerStateCancelled:
+			[self.delegate gestureHandlerViewEndsRotating:self];
+			break;
+			
+  default:
+			break;
+	}
 }
+
 - (void)hideHandlers:(BOOL)hide animated:(BOOL)animated
 {
 	const CGFloat alpha = hide ? 0.5 : 1;

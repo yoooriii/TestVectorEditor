@@ -14,4 +14,8 @@
 - (void)gestureHandlerViewMoved:(ZzUserInteractionControlView*)view;
 - (void)gestureHandlerViewEndsMoving:(ZzUserInteractionControlView*)view;
 
+- (void)gestureHandlerViewBeganRotating:(ZzUserInteractionControlView*)view;
+- (void)gestureHandlerViewRotated:(ZzUserInteractionControlView*)view;
+- (void)gestureHandlerViewEndsRotating:(ZzUserInteractionControlView*)view;
+
 @end

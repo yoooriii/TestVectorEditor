@@ -19,4 +19,5 @@
 @property (nonatomic, assign, getter=isMoving) BOOL		moving;
 @property (nonatomic, assign, getter=isResizing) BOOL		resizing;
 @property (nonatomic, assign, getter=isSelected) BOOL selected;
+@property (nonatomic, assign) CGFloat rotationAngle;
 @end
